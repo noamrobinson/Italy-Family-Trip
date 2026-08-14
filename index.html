@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>צפון איטליה ושוויץ — 12–24.9.2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
  --bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#687386;--blue:#2563eb;--red:#dc2626;
@@ -237,10 +238,41 @@ body.mapModalOpen{overflow:hidden}
   height:560px;
 }
 
+
+/* Typography + modern hero v5 */
+body{font-family:Arial,"Noto Sans Hebrew",sans-serif !important;}
+.hero{position:relative;overflow:hidden;padding:38px 5vw 34px;background:linear-gradient(125deg,#0f172a 0%,#173b78 52%,#2563eb 100%);border-bottom:1px solid rgba(255,255,255,.15)}
+.hero:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;left:-80px;top:-190px;background:rgba(255,255,255,.07)}
+.hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:8%;bottom:-175px;border:1px solid rgba(255,255,255,.14)}
+.hero h1{position:relative;z-index:1;margin:0 0 9px;font-family:Georgia,"Times New Roman",serif !important;font-size:clamp(31px,4.6vw,50px);font-weight:600;letter-spacing:-.7px;line-height:1.08}
+.hero p{position:relative;z-index:1;font-family:Arial,"Noto Sans Hebrew",sans-serif !important;font-size:14px;letter-spacing:.2px;opacity:.84}
+.day,.daybtn,.daybtn *, .detail,.detail *{font-family:Arial,"Noto Sans Hebrew",sans-serif !important}.daybtn .title{font-weight:800 !important;letter-spacing:0 !important}
+
+
+/* Unified typography + trip summary hero */
+body,button,input,select,textarea,.day,.daybtn,.daybtn *,.detail,.detail *{font-family:"Assistant",Arial,sans-serif !important;}
+.hero{position:relative;overflow:hidden;padding:34px 5vw 24px;background:linear-gradient(125deg,#10213f 0%,#1d4f91 55%,#2f6fec 100%);border-bottom:1px solid rgba(255,255,255,.15);}
+.hero h1{position:relative;z-index:1;margin:0 0 6px;font-family:"Assistant",Arial,sans-serif !important;font-size:clamp(30px,4vw,46px);font-weight:800;letter-spacing:0;line-height:1.08;}
+.hero p{position:relative;z-index:1;margin:0 0 20px;font-family:"Assistant",Arial,sans-serif !important;font-size:15px;font-weight:500;opacity:.9;}
+.heroStats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:980px;}
+.heroStat{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:11px 13px;backdrop-filter:blur(6px);}
+.heroStat b{display:block;font-size:18px;line-height:1.2;margin-bottom:2px;}
+.heroStat span{display:block;font-size:12px;opacity:.82;}
+@media(max-width:760px){.heroStats{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
-<header class="hero"><h1>צפון איטליה ושוויץ — הטיול המשפחתי</h1><p>12–24 בספטמבר 2026 · תכנון אינטראקטיבי</p></header>
+<header class="hero">
+  <h1>טיול משפחתי בצפון איטליה</h1>
+  <p>12–24 בספטמבר 2026 · איטליה ושוויץ · מסלול משפחתי ברכב</p>
+  <div class="heroStats">
+    <div class="heroStat"><b>12 לילות</b><span>כולל לילה ראשון ואחרון ליד Malpensa</span></div>
+    <div class="heroStat"><b>5 אזורי טיול</b><span>קומו · לוגאנו · דולומיטים · ונציה · גארדה</span></div>
+    <div class="heroStat"><b>~990 ק״מ</b><span>בין בסיסי הלינה המרכזיים</span></div>
+    <div class="heroStat"><b>3 חוויות ילדים בולטות</b><span>Swissminiatur · רכבלים · Gardaland</span></div>
+  </div>
+</header>
 
 <main class="wrap">
 <div class="tabs">
@@ -290,12 +322,6 @@ body.mapModalOpen{overflow:hidden}
     </section>
 
     <section id="plan" class="panel">
-      <div class="summary">
-        <div class="card stat"><b>12</b><span>לילות</span></div>
-        <div class="card stat"><b>5</b><span>אזורי טיול</span></div>
-        <div class="card stat"><b>~990</b><span>ק״מ בין בסיסי לינה*</span></div>
-        <div class="card stat"><b>3</b><span>חוויות ילדים מרכזיות</span></div>
-      </div>
       <div id="days"></div>
       <div class="card note">*המרחקים וזמני הנהיגה הם אומדנים. מומלץ לבדוק Waze/Google Maps בזמן אמת. שעות רכבלים, פארקים ומעבורות יש לאמת סמוך לנסיעה.</div>
     </section>
@@ -637,7 +663,7 @@ body.mapModalOpen{overflow:hidden}
           <button class="mapMode driveToggle" id="driveToggle" data-active="false">🚗 מסלול נסיעה אמיתי</button>
         </div>
       </div>
-      <div class="routeStatus" id="routeStatus">מצב תכנון: קווים סכמטיים בין התחנות.</div>
+      <div class="routeStatus" id="routeStatus" style="display:none"></div>
       <div class="mapLayoutControls">
         <button class="mapLayoutBtn" id="wideMapBtn">↔️ תצוגה רחבה</button>
         <button class="mapLayoutBtn" id="fullscreenMapBtn">⛶ הגדל מפה</button>
