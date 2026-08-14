@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>צפון איטליה ושוויץ — 12–24.9.2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{
+ --bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#687386;--blue:#2563eb;--red:#dc2626;
+ --line:#e4e9f2;--kid:#fff0e8;--route:#64748b;--highlight:#111827;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--bg);color:var(--ink)}
+.hero{padding:28px 5vw;background:linear-gradient(135deg,#153a8a,#3478ed);color:#fff}
+.hero h1{margin:0 0 7px;font-size:clamp(27px,4vw,44px)}.hero p{margin:0;opacity:.9}
+.wrap{max-width:1280px;margin:auto;padding:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 7px 22px rgba(30,50,90,.05)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.tab{border:0;border-radius:999px;padding:10px 16px;background:#e8eef9;cursor:pointer;font-weight:700}
+.tab.active{background:var(--blue);color:#fff}
+.panel{display:none}.panel.active{display:block}
+.mainGrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.75fr);gap:18px;align-items:start}
+.leftCol{min-width:0}.rightCol{position:sticky;top:12px}
+.mapCard{overflow:hidden}.maphead{padding:14px 16px;border-bottom:1px solid var(--line);line-height:1.6}
+#map{height:680px;direction:ltr}
+.mapToolbar{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.slice{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:999px;padding:8px 11px;font-weight:700;cursor:pointer;font-size:12px}
+.slice.active{background:#111827;color:#fff;border-color:#111827}.slice.redS.active{background:#dc2626;border-color:#dc2626}.slice.blueS.active{background:#2563eb;border-color:#2563eb}.slice.routeS.active{background:#475569;border-color:#475569}
+.mapModeTabs{display:flex;gap:6px;margin-right:auto}.mapMode{border:0;border-radius:10px;padding:8px 10px;background:#e8eef9;cursor:pointer;font-weight:700;font-size:12px}.mapMode.active{background:#2563eb;color:#fff}
+.routeStatus{font-size:12px;color:#64748b;padding:0 14px 10px}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 5px}
+.red{background:var(--red)}.blue{background:var(--blue)}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{padding:15px;text-align:center}.stat b{display:block;color:var(--blue);font-size:22px}.stat span{font-size:12px;color:var(--muted)}
+.day{margin:10px 0;overflow:hidden}
+.daybtn{width:100%;border:0;background:#fff;padding:16px 18px;display:grid;grid-template-columns:110px 1fr 190px;gap:12px;text-align:right;cursor:pointer;color:var(--ink);align-items:center}
+.date{color:var(--blue);font-weight:800}.title{font-size:18px;font-weight:800}.mini{color:var(--muted);font-size:13px}.chev{font-size:20px;color:var(--blue)}
+.transportBadges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.tbadge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:700;background:#f8fafc;border:1px solid #e2e8f0}.tbadge .tdot{width:9px;height:9px;border-radius:50%;display:inline-block}.car .tdot{background:#111827}.ferry .tdot{background:#0ea5e9}.transit .tdot{background:#8b5cf6}.cable .tdot{background:#16a34a}
+.detail{display:none;border-top:1px solid var(--line);padding:17px 18px;background:#fbfcff}.day.open .detail{display:block}
+.day.activeDay{outline:2px solid #cbd5e1}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.slot{border-right:3px solid #dbe5ff;padding:2px 11px}.slot h4{margin:0 0 6px;color:var(--blue)}.slot p{margin:0;line-height:1.55}
+.sleep{margin-top:14px;font-weight:700;color:var(--red)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.gallery figure{margin:0;border-radius:13px;overflow:hidden;background:#edf2f7;min-height:115px}
+.gallery img{display:block;width:100%;height:150px;object-fit:cover}
+.gallery figcaption{padding:7px 9px;font-size:12px;color:#4b5563;background:#fff}
+.hotels{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.hotel{padding:17px}
+.hotel h3{margin:0 0 5px}.hotel h4{margin:13px 0 5px}.hotel p{margin:5px 0;line-height:1.55;color:#48556a}
+.badge{font-size:12px;background:#eef4ff;padding:5px 8px;border-radius:999px;display:inline-block}
+.attractGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.attract{padding:18px}.attract h3{margin:0 0 7px}.attract p{margin:6px 0;line-height:1.55;color:#48556a}.stars{font-size:18px;letter-spacing:1px}.age{display:inline-block;background:#fff7ed;color:#9a3412;border-radius:999px;padding:5px 9px;font-size:12px;margin-left:5px}.when{display:inline-block;background:#ecfeff;color:#155e75;border-radius:999px;padding:5px 9px;font-size:12px}.must{display:inline-block;background:#fee2e2;color:#991b1b;border-radius:999px;padding:5px 9px;font-size:12px}.attract ul{margin:8px 0 0;padding-right:18px;line-height:1.6;color:#48556a}
+.note{padding:16px;margin-top:16px;color:#536176;line-height:1.6}
+@media(max-width:980px){
+ .mainGrid{grid-template-columns:1fr}.rightCol{position:static;order:-1}#map{height:450px}
+}
+@media(max-width:760px){
+ .summary{grid-template-columns:1fr 1fr}.daybtn{grid-template-columns:1fr}.timeline,.hotels,.gallery,.attractGrid{grid-template-columns:1fr}
+ .gallery img{height:190px}
+}
+</style>
+</head>
+<body>
+<header class="hero"><h1>צפון איטליה ושוויץ — הטיול המשפחתי</h1><p>12–24 בספטמבר 2026 · תכנון אינטראקטיבי</p></header>
+
+<main class="wrap">
+<div class="tabs">
+  <button class="tab active" data-tab="plan">📅 מסלול יומי</button>
+  <button class="tab" data-tab="stay">🏨 אפשרויות לינה</button>
+  <button class="tab" data-tab="attractions">🎡 אטרקציות לילדים</button>
+</div>
+
+<div class="mainGrid">
+  <div class="leftCol">
+    <section id="plan" class="panel active">
+      <div class="summary">
+        <div class="card stat"><b>12</b><span>לילות</span></div>
+        <div class="card stat"><b>5</b><span>אזורי טיול</span></div>
+        <div class="card stat"><b>~990</b><span>ק״מ בין בסיסי לינה*</span></div>
+        <div class="card stat"><b>3</b><span>חוויות ילדים מרכזיות</span></div>
+      </div>
+      <div id="days"></div>
+      <div class="card note">*המרחקים וזמני הנהיגה הם אומדנים. מומלץ לבדוק Waze/Google Maps בזמן אמת. שעות רכבלים, פארקים ומעבורות יש לאמת סמוך לנסיעה.</div>
+    </section>
+
+    <section id="stay" class="panel">
+      <h2>אפשרויות לינה לפי אזור</h2>
+      <div class="hotels">
+        <div class="card hotel"><span class="badge">12/9 + 23/9</span><h3>✈️ Malpensa</h3><h4>Sheraton Milan Malpensa</h4><p>גישה ישירה לטרמינל 1, נוח במיוחד ללילה האחרון.</p><h4>Holiday Inn Express Malpensa</h4><p>אפשרות פרקטית וזולה יותר בקרבת השדה.</p><h4>Idea Hotel Malpensa</h4><p>אופציית תקציב בקרבת השדה.</p></div>
+        <div class="card hotel"><span class="badge">13–14/9</span><h3>🌊 Menaggio / Como</h3><h4>Hotel Garni Corona</h4><p>מיקום מרכזי מאוד ב-Menaggio.</p><h4>Grand Hotel Menaggio</h4><p>על האגם ובקרבת המעבורות.</p><h4>Hotel Sonenga</h4><p>אפשרות פשוטה יותר באזור.</p></div>
+        <div class="card hotel"><span class="badge">15/9</span><h3>🇨🇭 Lugano</h3><h4>LUGANODANTE</h4><p>מרכזי ונוח להליכה בעיר.</p><h4>International au Lac</h4><p>על שפת האגם.</p><h4>Novotel Lugano Paradiso</h4><p>אופציה משפחתית פרקטית.</p></div>
+        <div class="card hotel"><span class="badge">16–18/9</span><h3>🏔️ Ortisei</h3><h4>Hotel Albion Mountain Spa Resort</h4><p>מתאים למשפחה, עם מתקנים וחניה.</p><h4>Hotel Garni Walter</h4><p>אפשרות פשוטה יותר בתוך Ortisei.</p><h4>Cavallino Bianco Family Spa</h4><p>מלון משפחות ייעודי ברמה גבוהה.</p></div>
+        <div class="card hotel"><span class="badge">19/9</span><h3>🚤 Mestre</h3><h4>Staycity Aparthotels Venice Mestre</h4><p>נוח למשפחה וללילה אחד.</p><h4>Leonardo Royal Hotel Venice Mestre</h4><p>מודרני ובקרבת התחנה.</p><h4>Novotel Venezia Mestre Castellana</h4><p>פרקטי עם רכב.</p></div>
+        <div class="card hotel"><span class="badge">20–22/9</span><h3>🌊 Malcesine</h3><h4>Hotel Castello Lake Front</h4><p>מיקום מצוין ליד העיר העתיקה.</p><h4>Ambient Hotel PrimaLuna</h4><p>על שפת האגם.</p><h4>Hotel Capri</h4><p>אופציה טובה לשהות של שלושה לילות.</p></div>
+      </div>
+    </section>
+
+    <section id="attractions" class="panel">
+      <h2>אטרקציות וחוויות שמתאימות לילדים</h2>
+      <div class="attractGrid">
+
+        <div class="card attract">
+          <span class="must">⭐ שיא לילדים</span>
+          <h3>🎢 Gardaland</h3>
+          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 22/9</p>
+          <div><span class="age">מתאים במיוחד: 5–13+</span><span class="when">יום מלא</span></div>
+          <p class="stars">★★★★★</p>
+          <ul>
+            <li>מתקנים משפחתיים, רכבות הרים ומתחמי ילדים.</li>
+            <li>היום המרכזי בטיול שמוקדש נטו לילדים.</li>
+            <li>מומלץ להגיע לפתיחה ולהישאר עד שעות אחר הצהריים.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">מומלץ מאוד</span>
+          <h3>🚠 Seceda + רכבל</h3>
+          <p><b>אזור:</b> דולומיטים · <b>יום:</b> 17/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום–יום</span></div>
+          <p class="stars">★★★★★</p>
+          <ul>
+            <li>עצם העלייה ברכבל היא חוויה לילדים.</li>
+            <li>מסלולים קצרים עם נוף מרשים מאוד.</li>
+            <li>אפשר לשלב בקתה וארוחת צהריים בהר.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">מומלץ</span>
+          <h3>🧗 Adventure Park / Fly Line</h3>
+          <p><b>אזור:</b> Ortisei · <b>יום:</b> 17/9</p>
+          <div><span class="age">מתאים: בערך 5+</span><span class="when">1.5–2 שעות</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>מסלולי חבלים, אתגרי גובה ו-Fly Line.</li>
+            <li>מתאים כתוספת אחר הצהריים אחרי Seceda.</li>
+            <li>יש לאמת פתיחה בתאריכים שלכם סמוך לנסיעה.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">מומלץ</span>
+          <h3>🏔️ Alpe di Siusi</h3>
+          <p><b>אזור:</b> דולומיטים · <b>יום:</b> 18/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום–יום</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>מרחבים פתוחים, רכבל והליכות קלות יחסית.</li>
+            <li>חוויה טובה לילדים שאוהבים טבע בלי מסלול מאתגר.</li>
+            <li>אפשר לשלב הפסקת אוכל בבקתה.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">כיף לילדים</span>
+          <h3>🧩 Swissminiatur</h3>
+          <p><b>אזור:</b> Lugano / Melide · <b>יום:</b> 15/9</p>
+          <div><span class="age">מתאים במיוחד: 4–12</span><span class="when">2–3 שעות</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>שוויץ במיניאטורות עם רכבות, מבנים ואתרים מפורסמים.</li>
+            <li>שובר יפה יום של נוף ועיירות.</li>
+            <li>נוח לשלב אחרי Lugano ו-Gandria.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">חוויה משפחתית</span>
+          <h3>⛴️ Bellagio + Varenna במעבורת</h3>
+          <p><b>אזור:</b> אגם קומו · <b>יום:</b> 14/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">יום רגוע</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>השיט עצמו מוסיף עניין לילדים.</li>
+            <li>כמעט בלי נסיעות רכב באותו יום.</li>
+            <li>אפשר לשלב גלידה, טיילת וסמטאות בלי לחץ.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">חוויה ייחודית</span>
+          <h3>🛶 ונציה – Vaporetto / גונדולה</h3>
+          <p><b>אזור:</b> Venice · <b>יום:</b> 19/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">6–8 שעות בעיר</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>הסירות והתעלות הופכות את העיר לחוויה לילדים.</li>
+            <li>Vaporetto על Grand Canal הוא אופציה מצוינת למשפחה.</li>
+            <li>גונדולה אפשרית, אבל לא חובה.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">מומלץ מאוד</span>
+          <h3>🚠 Monte Baldo</h3>
+          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 21/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום</span></div>
+          <p class="stars">★★★★★</p>
+          <ul>
+            <li>רכבל עם תצפית מרשימה על אגם גארדה.</li>
+            <li>אפשר לשלב הליכה קצרה ולא מאומצת.</li>
+            <li>מתאים מאוד לפני שיט ל-Limone.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">משפחתי ורגוע</span>
+          <h3>⛴️ שיט ל-Limone sul Garda</h3>
+          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 21/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">2–4 שעות</span></div>
+          <p class="stars">★★★★☆</p>
+          <ul>
+            <li>שיט קצר שמוסיף גיוון ליום.</li>
+            <li>עיירה נעימה לטיול, גלידה וארוחה.</li>
+            <li>פחות הליכה מאומצת ויותר יום חופשה רגוע.</li>
+          </ul>
+        </div>
+
+        <div class="card attract">
+          <span class="must">אופציונלי</span>
+          <h3>🚞 Brunate Funicular</h3>
+          <p><b>אזור:</b> Como · <b>יום:</b> 13/9</p>
+          <div><span class="age">מתאים: כל המשפחה</span><span class="when">1–2 שעות</span></div>
+          <p class="stars">★★★☆☆</p>
+          <ul>
+            <li>עלייה קצרה ומהנה מעל העיר Como.</li>
+            <li>תצפית יפה בלי צורך במסלול ארוך.</li>
+            <li>מתאים אם הילדים עדיין עם אנרגיה אחרי הנסיעה.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="card note">
+        <b>האיזון המומלץ לילדים בטיול:</b> Gardaland כ״יום ילדים״ מלא, Swissminiatur כחוויה קצרה באמצע הטיול, ו-Seceda / Monte Baldo כחוויות טבע שיש בהן גם רכבל ואקשן. כך כמעט כל יומיים–שלושה יש משהו שמרגיש שונה ומיוחד עבור הילדים.
+      </div>
+    </section>
+  </div>
+
+  <aside class="rightCol">
+    <div class="card mapCard">
+      <div class="maphead">
+        <span class="dot red"></span><b>אדום — לינה</b> &nbsp;&nbsp;
+        <span class="dot blue"></span><b>כחול — נקודת עניין</b><br>
+        <span class="mini">לחיצה על יום מדגישה את אותו היום. קו שחור = רכב · תכלת מקווקו = שייט/מעבורת · סגול = תחבורה ציבורית · ירוק = רכבל.</span>
+      </div>
+      <div class="mapToolbar">
+        <button class="slice redS active" data-layer="sleep">🏨 לינה</button>
+        <button class="slice blueS active" data-layer="poi">📍 נקודות עניין</button>
+        <button class="slice routeS active" data-layer="fullroute">〰️ מסלול כללי</button>
+        <button class="slice routeS active" data-layer="dayroute">🗓️ מסלול יום נבחר</button>
+        <div class="mapModeTabs">
+          <button class="mapMode active" data-mode="overview">מפת תכנון</button>
+          <button class="mapMode" data-mode="drive">🚗 מסלול נסיעה אמיתי</button>
+        </div>
+      </div>
+      <div class="routeStatus" id="routeStatus">מצב תכנון: קווים סכמטיים בין התחנות.</div>
+      <div id="map"></div>
+    </div>
+  </aside>
+</div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const dayData=[
+{
+ d:"12/9", t:"נחיתה במלפנסה", drive:"0–10 ק״מ · 5–15 דק׳",
+ morning:"נחיתה סביב 22:00, ביקורת דרכונים ואיסוף מזוודות.",
+ noon:"איסוף הרכב השכור. אין תכנון לנסיעה ארוכה בלילה.",
+ eve:"Check-in ולינה ליד/בתוך השדה כדי להתחיל רעננים למחרת.",
+ sleep:"Malpensa Airport",
+ pts:["Malpensa"], route:["Malpensa"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","נחיתה ואיסוף רכב"],
+  ["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","לילה רגוע ליד השדה"],
+  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","מתחילים את הטיול למחרת"]
+ ]
+},
+{
+ d:"13/9", t:"Malpensa → אגם קומו", drive:"~80 ק״מ · ~1:15 ש׳",
+ morning:"ארוחת בוקר ויציאה לכיוון Como. טיול קצר בטיילת ובמרכז.",
+ noon:"עלייה ל-Brunate לתצפית, ארוחת צהריים והמשך לאורך האגם.",
+ eve:"הגעה ל-Menaggio, צ'ק-אין, טיילת וארוחת ערב מול האגם.",
+ sleep:"Menaggio",
+ pts:["Malpensa","Como","Brunate","Menaggio"], route:["Malpensa","Como","Brunate","Menaggio"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","אגם קומו"],
+  ["https://images.unsplash.com/photo-1612128557461-4c4e369fd2a2?auto=format&fit=crop&w=1200&q=80","תצפיות מעל קומו"],
+  ["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","עיירות האגם"]
+ ]
+},
+{
+ d:"14/9", t:"Bellagio + Varenna", drive:"רכב מינימלי · מעבורות",
+ morning:"יציאה רגלית לנמל Menaggio ומעבורת ל-Bellagio. סיור בעיירה.",
+ noon:"מעבורת ל-Varenna, ארוחת צהריים, סמטאות וטיילת האגם.",
+ eve:"חזרה במעבורת ל-Menaggio. ערב רגוע בעיירה.",
+ sleep:"Menaggio",
+ pts:["Menaggio","Bellagio","Varenna"], route:["Menaggio"], ferry:[["Menaggio","Bellagio"],["Bellagio","Varenna"],["Varenna","Menaggio"]],
+ imgs:[
+  ["https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=80","Bellagio"],
+  ["https://images.unsplash.com/photo-1590179832266-0c1d79a02316?auto=format&fit=crop&w=1200&q=80","Varenna"],
+  ["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","שיט על אגם קומו"]
+ ]
+},
+{
+ d:"15/9", t:"לוגאנו + Gandria", drive:"27 ק״מ · ~33 דק׳ לבסיס",
+ morning:"יציאה ל-Lugano, חניה וצ'ק-אין/השארת מזוודות. Parco Ciani והמרכז.",
+ noon:"שיט/ביקור ב-Gandria וארוחת צהריים. בהמשך Swissminiatur ב-Melide.",
+ eve:"חזרה ל-Lugano, טיילת וארוחת ערב בעיר.",
+ sleep:"Lugano",
+ pts:["Menaggio","Lugano","Gandria","Swissminiatur"], route:["Menaggio","Lugano","Swissminiatur","Lugano"], ferry:[["Lugano","Gandria"],["Gandria","Lugano"]],
+ imgs:[
+  ["https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=80","לוגאנו והאגם"],
+  ["https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80","הכפרים של טיצ'ינו"],
+  ["https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80","חוויה משפחתית בשוויץ"]
+ ]
+},
+{
+ d:"16/9", t:"לוגאנו → הדולומיטים", drive:"~296 ק״מ · ~5:05 ש׳",
+ morning:"יציאה מוקדמת אחרי ארוחת בוקר. זה יום המעבר הארוך בטיול.",
+ noon:"עצירת אוכל והתרעננות בדרך; לא להעמיס אטרקציות גדולות.",
+ eve:"הגעה ל-Ortisei, צ'ק-אין, הליכה במרכז וארוחת ערב.",
+ sleep:"Ortisei",
+ pts:["Lugano","Ortisei"], route:["Lugano","Ortisei"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","יום מעבר נופי"],
+  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","הדרך לאלפים"],
+  ["https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80","הגעה לאזור ההרים"]
+ ]
+},
+{
+ d:"17/9", t:"Seceda", drive:"כמעט ללא רכב",
+ morning:"עלייה מוקדמת ברכבל ל-Seceda לפני העומס. תצפית ומסלול משפחתי.",
+ noon:"ארוחת צהריים בהר/בקתה והמשך הליכה בקצב רגוע.",
+ eve:"ירידה ל-Ortisei. אם פתוח ומתאים — Adventure Park / Fly Line; אחרת מרכז העיירה.",
+ sleep:"Ortisei",
+ pts:["Ortisei","Seceda"], route:["Ortisei","Seceda","Ortisei"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","נוף הררי דרמטי"],
+  ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80","הליכה בהרים"],
+  ["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","רכבלים ותצפיות"]
+ ]
+},
+{
+ d:"18/9", t:"Alpe di Siusi + מעברי הרים", drive:"30–70 ק״מ מקומי",
+ morning:"עלייה ל-Alpe di Siusi וטיול באחו האלפיני.",
+ noon:"ארוחת צהריים באזור וחזרה. בהתאם למזג האוויר — יציאה לנסיעה נופית.",
+ eve:"Passo Sella + Passo Gardena אם הזמן מאפשר; חזרה ל-Ortisei.",
+ sleep:"Ortisei",
+ pts:["Ortisei","Alpe di Siusi"], route:["Ortisei","Alpe di Siusi","Ortisei"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","אחו אלפיני"],
+  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","טיול משפחתי בטבע"],
+  ["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","מעברי ההרים"]
+ ]
+},
+{
+ d:"19/9", t:"הדולומיטים → ונציה", drive:"~199 ק״מ · ~3 ש׳",
+ morning:"יציאה סביב 08:00–08:30 ל-Mestre. השארת הרכב והמזוודות.",
+ noon:"כניסה לוונציה: Piazza San Marco, בזיליקה והליכה בסמטאות.",
+ eve:"Rialto + Grand Canal, Vaporetto/גונדולה אופציונלית, ארוחת ערב וחזרה ל-Mestre.",
+ sleep:"Mestre",
+ pts:["Ortisei","Mestre","Venice"], route:["Ortisei","Mestre"], transit:[["Mestre","Venice"]],
+ imgs:[
+  ["https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=80","ונציה"],
+  ["https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=80","התעלות והגונדולות"],
+  ["https://images.unsplash.com/photo-1533676802871-eca1ae998cd5?auto=format&fit=crop&w=1200&q=80","ערב בעיר"]
+ ]
+},
+{
+ d:"20/9", t:"ונציה → אגם גארדה", drive:"~168 ק״מ · ~2 ש׳",
+ morning:"ארוחת בוקר ויציאה מ-Mestre לכיוון Malcesine.",
+ noon:"הגעה, צ'ק-אין וארוחת צהריים. ביקור ב-Castello Scaligero והעיר העתיקה.",
+ eve:"טיילת, גלידה ושקיעה על האגם. ערב רגוע.",
+ sleep:"Malcesine",
+ pts:["Mestre","Malcesine"], route:["Mestre","Malcesine"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","אגם גארדה"],
+  ["https://images.unsplash.com/photo-1600359734513-53f4f9256664?auto=format&fit=crop&w=1200&q=80","Malcesine"],
+  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","ערב רגוע על האגם"]
+ ]
+},
+{
+ d:"21/9", t:"Monte Baldo + Limone", drive:"מעט נהיגה אם משתמשים בשיט",
+ morning:"עלייה מוקדמת ברכבל Monte Baldo, תצפיות והליכה קצרה.",
+ noon:"ירידה ל-Malcesine וארוחת צהריים. שיט ל-Limone sul Garda.",
+ eve:"טיול ב-Limone וחזרה בשיט ל-Malcesine לארוחת ערב.",
+ sleep:"Malcesine",
+ pts:["Malcesine","Monte Baldo","Limone"], route:["Malcesine"], ferry:[["Malcesine","Limone"],["Limone","Malcesine"]], cable:[["Malcesine","Monte Baldo"],["Monte Baldo","Malcesine"]],
+ imgs:[
+  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","Monte Baldo"],
+  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","שיט באגם"],
+  ["https://images.unsplash.com/photo-1600359734513-53f4f9256664?auto=format&fit=crop&w=1200&q=80","Limone"]
+ ]
+},
+{
+ d:"22/9", t:"Gardaland", drive:"~45 ק״מ לכל כיוון",
+ morning:"יציאה לכיוון Gardaland והגעה לפתיחה ככל האפשר.",
+ noon:"יום מלא בפארק — מתקנים משפחתיים ורכבות הרים לפי הגילים.",
+ eve:"חזרה ל-Malcesine, ארוחת ערב ומנוחה.",
+ sleep:"Malcesine",
+ pts:["Malcesine","Gardaland"], route:["Malcesine","Gardaland","Malcesine"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?auto=format&fit=crop&w=1200&q=80","יום פארק שעשועים"],
+  ["https://images.unsplash.com/photo-1549049950-3d4fcf148581?auto=format&fit=crop&w=1200&q=80","מתקנים לכל המשפחה"],
+  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","חזרה רגועה לאגם"]
+ ]
+},
+{
+ d:"23/9", t:"Sirmione → Malpensa", drive:"~220 ק״מ סה״כ · ~3 ש׳ נטו",
+ morning:"Check-out ויציאה ל-Sirmione. Castello Scaligero והעיר העתיקה.",
+ noon:"ארוחת צהריים וטיול קצר. יציאה לכיוון Malpensa עם מרווח ביטחון.",
+ eve:"תדלוק והחזרת הרכב סביב 20:00 → מלון ליד/בתוך השדה → שינה קצרה.",
+ sleep:"Malpensa Airport",
+ pts:["Malcesine","Sirmione","Malpensa"], route:["Malcesine","Sirmione","Malpensa"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","בוקר אחרון בגארדה"],
+  ["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","Sirmione"],
+  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","חזרה לשדה"]
+ ]
+},
+{
+ d:"24/9", t:"טיסה הביתה", drive:"—",
+ morning:"השכמה לפנות בוקר ויציאה לטרמינל.",
+ noon:"טיסה בשעה 05:00.",
+ eve:"—", sleep:"—", pts:["Malpensa"], route:["Malpensa"],
+ imgs:[
+  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","טיסה הביתה"],
+  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","סיום הטיול"],
+  ["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","חזרה הביתה"]
+ ]
+}
+];
+
+const coords={
+ "Malpensa":[45.6306,8.7281],"Como":[45.8081,9.0852],"Brunate":[45.8200,9.0980],"Menaggio":[46.0200,9.2380],
+ "Bellagio":[45.9877,9.2615],"Varenna":[46.0107,9.2837],"Lugano":[46.0037,8.9511],"Gandria":[46.0048,9.0030],
+ "Swissminiatur":[45.9550,8.9470],"Ortisei":[46.5766,11.6728],"Seceda":[46.6007,11.7244],"Alpe di Siusi":[46.5400,11.6170],
+ "Mestre":[45.4939,12.2429],"Venice":[45.4408,12.3155],"Malcesine":[45.7630,10.8080],"Monte Baldo":[45.7735,10.8435],
+ "Limone":[45.8145,10.7928],"Gardaland":[45.4550,10.7130],"Sirmione":[45.4927,10.6080]
+};
+const sleeps=new Set(["Malpensa","Menaggio","Lugano","Ortisei","Mestre","Malcesine"]);
+const labels={"Malpensa":"Malpensa","Como":"Como","Brunate":"Brunate","Menaggio":"Menaggio","Bellagio":"Bellagio","Varenna":"Varenna","Lugano":"Lugano","Gandria":"Gandria","Swissminiatur":"Swissminiatur","Ortisei":"Ortisei","Seceda":"Seceda","Alpe di Siusi":"Alpe di Siusi","Mestre":"Mestre","Venice":"Venice","Malcesine":"Malcesine","Monte Baldo":"Monte Baldo","Limone":"Limone","Gardaland":"Gardaland","Sirmione":"Sirmione"};
+
+const map=L.map('map').setView([45.8,10.1],7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
+function mkIcon(color,size=16,ring=false){
+ return L.divIcon({html:`<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:${ring?4:3}px solid white;box-shadow:0 1px 8px #555"></div>`,className:'',iconSize:[size,size]});
+}
+const markerObjs={};
+const sleepMarkers=[]; const poiMarkers=[];
+Object.entries(coords).forEach(([name,c])=>{
+ const isSleep=sleeps.has(name);
+ const marker=L.marker(c,{icon:mkIcon(isSleep?'#dc2626':'#2563eb',isSleep?19:15)}).addTo(map).bindPopup(`<b>${isSleep?'🏨':'📍'} ${labels[name]}</b>`);
+ markerObjs[name]=marker;
+ (isSleep?sleepMarkers:poiMarkers).push(marker);
+});
+const fullRouteNames=["Malpensa","Como","Menaggio","Lugano","Ortisei","Mestre","Venice","Malcesine","Gardaland","Sirmione","Malpensa"];
+const fullRoute=L.polyline(fullRouteNames.map(n=>coords[n]),{color:'#94a3b8',weight:3,opacity:.6,dashArray:'7 7'}).addTo(map);
+let realDriveRoute=null;
+map.fitBounds(L.latLngBounds(fullRoute.getLatLngs()).pad(.12));
+let highlightLine=null, highlightGroup=null;
+
+function resetMarkers(){
+ Object.entries(markerObjs).forEach(([name,m])=>{
+   const isSleep=sleeps.has(name);
+   m.setIcon(mkIcon(isSleep?'#dc2626':'#2563eb',isSleep?19:15));
+   m.setOpacity(.65);
+ });
+}
+function highlightDay(i){
+ const data=dayData[i]; resetMarkers();
+ data.pts.forEach(name=>{
+   if(markerObjs[name]){
+     const isSleep=sleeps.has(name);
+     markerObjs[name].setOpacity(1);
+     markerObjs[name].setIcon(mkIcon(isSleep?'#dc2626':'#2563eb',isSleep?23:20,true));
+   }
+ });
+ if(highlightLine) map.removeLayer(highlightLine);
+ if(window.modeLines){ window.modeLines.forEach(l=>map.removeLayer(l)); }
+ window.modeLines=[];
+ const latlngs=data.route.map(n=>coords[n]).filter(Boolean);
+ highlightLine=L.polyline(latlngs,{color:'#111827',weight:6,opacity:.92}).addTo(map);
+ const addMode=(segments,color,dash,label)=>{
+   (segments||[]).forEach(seg=>{
+     const l=L.polyline(seg.map(n=>coords[n]),{color:color,weight:5,opacity:.9,dashArray:dash}).addTo(map);
+     l.bindTooltip(label,{sticky:true}); window.modeLines.push(l);
+   });
+ };
+ addMode(data.ferry,'#0ea5e9','10 7','⛴️ שייט / מעבורת');
+ addMode(data.transit,'#8b5cf6','6 7','🚆 תחבורה ציבורית');
+ addMode(data.cable,'#16a34a','4 6','🚠 רכבל');
+ if(!layerState.dayroute){
+   if(map.hasLayer(highlightLine)) map.removeLayer(highlightLine);
+   window.modeLines.forEach(l=>map.removeLayer(l));
+ }
+ const allPts=[...latlngs];
+ ['ferry','transit','cable'].forEach(k=>(data[k]||[]).forEach(seg=>seg.forEach(n=>allPts.push(coords[n]))));
+ if(allPts.length>1) map.fitBounds(L.latLngBounds(allPts).pad(.3)); else if(allPts.length===1) map.setView(allPts[0],10);
+}
+
+
+const layerState={sleep:true,poi:true,fullroute:true,dayroute:true};
+function setMarkerLayer(kind,on){
+ const arr=kind==='sleep'?sleepMarkers:poiMarkers;
+ arr.forEach(m=>{ if(on){ if(!map.hasLayer(m))m.addTo(map); } else { if(map.hasLayer(m))map.removeLayer(m); } });
+}
+document.querySelectorAll('.slice').forEach(btn=>btn.onclick=()=>{
+ const key=btn.dataset.layer; layerState[key]=!layerState[key]; btn.classList.toggle('active',layerState[key]);
+ if(key==='sleep'||key==='poi') setMarkerLayer(key,layerState[key]);
+ if(key==='fullroute'){ if(layerState[key]) fullRoute.addTo(map); else if(map.hasLayer(fullRoute)) map.removeLayer(fullRoute); }
+ if(key==='dayroute' && highlightLine){ if(layerState[key]){ highlightLine.addTo(map); (window.modeLines||[]).forEach(l=>l.addTo(map)); } else { if(map.hasLayer(highlightLine)) map.removeLayer(highlightLine); (window.modeLines||[]).forEach(l=>{if(map.hasLayer(l))map.removeLayer(l)}); } }
+});
+
+let currentMode='overview';
+async function drawRealDrivingRoute(){
+ const status=document.getElementById('routeStatus');
+ status.textContent='טוען מסלול נסיעה אמיתי לפי רשת הכבישים...';
+ if(realDriveRoute){ map.removeLayer(realDriveRoute); realDriveRoute=null; }
+
+ // Prefer the selected/open day; otherwise use the main inter-city overnight route.
+ let active=document.querySelector('.day.activeDay');
+ let names; let activeData=null;
+ if(active){
+   const i=Number(active.dataset.day); activeData=dayData[i];
+   names=activeData.route.filter(n=>coords[n]);
+ }else{
+   names=["Malpensa","Como","Menaggio","Lugano","Ortisei","Mestre","Malcesine","Sirmione","Malpensa"];
+ }
+ // Remove consecutive duplicates. Ferry/boat/public-transit/cable-car legs are intentionally excluded.
+ names=names.filter((n,i)=>i===0 || n!==names[i-1]);
+ if(activeData && names.length<2){
+   status.textContent='ביום הזה אין מסלול נהיגה בין נקודות העניין: המעברים נעשים בשייט/מעבורת, תחבורה ציבורית או רכבל.';
+   return;
+ }
+
+ // OSRM supports many waypoints but practical public-server limits apply.
+ const coordsStr=names.map(n=>`${coords[n][1]},${coords[n][0]}`).join(';');
+ const url=`https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=full&geometries=geojson&steps=false`;
+ try{
+   const r=await fetch(url);
+   if(!r.ok) throw new Error('route');
+   const j=await r.json();
+   if(!j.routes || !j.routes[0]) throw new Error('route');
+   const latlngs=j.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);
+   realDriveRoute=L.polyline(latlngs,{color:'#f97316',weight:6,opacity:.9}).addTo(map);
+   map.fitBounds(realDriveRoute.getBounds().pad(.12));
+   const km=(j.routes[0].distance/1000).toFixed(0);
+   const hrs=j.routes[0].duration/3600;
+   const h=Math.floor(hrs), m=Math.round((hrs-h)*60);
+   const extra=(activeData && ((activeData.ferry||[]).length||(activeData.transit||[]).length||(activeData.cable||[]).length)) ? ' · קטעי שייט/מעבורת/תחבורה ציבורית/רכבל אינם כלולים בנתון הנהיגה.' : '';
+   status.textContent=`מסלול כביש אמיתי: ${km} ק״מ · כ-${h}:${String(m).padStart(2,'0')} שעות נהיגה נטו${extra}`;
+ }catch(e){
+   status.textContent='לא ניתן היה לטעון כרגע מסלול כביש אמיתי. מצב התכנון נשאר זמין.';
+ }
+}
+document.querySelectorAll('.mapMode').forEach(btn=>btn.onclick=async()=>{
+ document.querySelectorAll('.mapMode').forEach(x=>x.classList.remove('active'));
+ btn.classList.add('active'); currentMode=btn.dataset.mode;
+ if(currentMode==='overview'){
+   if(realDriveRoute){ map.removeLayer(realDriveRoute); realDriveRoute=null; }
+   document.getElementById('routeStatus').textContent='מצב תכנון: קווים סכמטיים בין התחנות.';
+   if(layerState.fullroute && !map.hasLayer(fullRoute)) fullRoute.addTo(map);
+ }else{
+   await drawRealDrivingRoute();
+ }
+});
+
+
+function transportBadges(d){
+  const out=[];
+  if((d.route||[]).length>1) out.push('<span class="tbadge car"><span class="tdot"></span>🚗 רכב</span>');
+  if((d.ferry||[]).length) out.push('<span class="tbadge ferry"><span class="tdot"></span>⛴️ שייט / מעבורת</span>');
+  if((d.transit||[]).length) out.push('<span class="tbadge transit"><span class="tdot"></span>🚆 תחבורה ציבורית</span>');
+  if((d.cable||[]).length) out.push('<span class="tbadge cable"><span class="tdot"></span>🚠 רכבל</span>');
+  return out.length?`<div class="transportBadges">${out.join('')}</div>`:'';
+}
+
+const box=document.getElementById('days');
+dayData.forEach((d,i)=>{
+ const gallery=d.imgs.map(x=>`<figure><img loading="lazy" src="${x[0]}" alt="${x[1]}"><figcaption>${x[1]}</figcaption></figure>`).join('');
+ box.insertAdjacentHTML('beforeend',`<div class="card day" data-day="${i}">
+ <button class="daybtn"><div class="date">${d.d}</div><div><div class="title">${d.t}</div><div class="mini">🚗 ${d.drive}</div>${transportBadges(d)}</div><div class="chev">⌄</div></button>
+ <div class="detail"><div class="timeline"><div class="slot"><h4>🌅 בוקר</h4><p>${d.morning}</p></div><div class="slot"><h4>☀️ צהריים</h4><p>${d.noon}</p></div><div class="slot"><h4>🌙 ערב</h4><p>${d.eve}</p></div></div>
+ ${d.sleep!="—"?`<div class="sleep">📍 לינה: ${d.sleep}</div>`:""}
+ <div class="gallery">${gallery}</div></div></div>`);
+});
+document.querySelectorAll('.daybtn').forEach(b=>b.onclick=()=>{
+ const day=b.parentElement, i=Number(day.dataset.day), wasOpen=day.classList.contains('open');
+ document.querySelectorAll('.day').forEach(x=>x.classList.remove('open','activeDay'));
+ if(!wasOpen){day.classList.add('open','activeDay');highlightDay(i); if(currentMode==='drive') drawRealDrivingRoute();}
+});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');
+ setTimeout(()=>map.invalidateSize(),100);
+});
+</script>
+</body></html>
