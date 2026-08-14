@@ -122,6 +122,67 @@ body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--b
   .daybtn .chev{grid-column:2;grid-row:1 / span 2;margin-right:auto !important;align-self:center}
 }
 
+
+/* Daily itinerary typography v4 */
+.daybtn .date{font-size:20px !important;line-height:1.2}
+.daybtn .title{font-size:22px !important;line-height:1.25}
+.daybtn .mini{font-size:14px !important;line-height:1.45}
+.transportBadges .tbadge{font-size:13px !important}
+.detail .slot h4{font-size:17px}
+.detail .slot p{font-size:15px;line-height:1.7}
+.detail .sleep{font-size:15px}
+.dayMeta .metaBox b{font-size:12px}
+.dayMeta .metaBox span{font-size:14px}
+
+/* Lodging cards v2 */
+.hotels{grid-template-columns:repeat(2,1fr) !important;gap:16px}
+.hotel{padding:0 !important;overflow:hidden;position:relative}
+.hotelHero{height:180px;position:relative;overflow:hidden;background:#e5e7eb}
+.hotelHero img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.hotel:hover .hotelHero img{transform:scale(1.035)}
+.hotelHero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(15,23,42,.68))}
+.hotelHeroTitle{position:absolute;right:18px;bottom:14px;z-index:2;color:#fff}
+.hotelHeroTitle h3{margin:0 0 3px;font-size:22px}.hotelHeroTitle span{font-size:12px;opacity:.9}
+.hotelBody{padding:17px}
+.hotelPick{border:1px solid #e2e8f0;border-radius:14px;padding:13px;margin:11px 0;background:#fbfdff}
+.hotelPick.recommended{border:2px solid #bfdbfe;background:#f5f9ff}
+.hotelPick h4{font-size:16px;margin:0 0 5px !important}
+.hotelPick p{font-size:13px;margin:4px 0 10px !important}
+.hotelActions{display:flex;gap:7px;flex-wrap:wrap}
+.hotelLink{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border-radius:9px;padding:7px 9px;font-size:12px;font-weight:700;background:#2563eb;color:#fff}
+.hotelMap{background:#eef2ff;color:#3730a3}.bookingLink{background:#003b95;color:#fff}
+.myChoice{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800;margin-bottom:6px}
+@media(max-width:760px){
+  .hotels{grid-template-columns:1fr !important}
+  .hotelHero{height:210px}
+  .daybtn .title{font-size:20px !important}
+  .daybtn .date{font-size:18px !important}
+}
+
+
+/* Hotel map icon v3 */
+.hotelPick{position:relative;padding-bottom:46px !important}
+.hotelMapIcon{
+  position:absolute;
+  left:12px;
+  right:auto;
+  bottom:11px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#eef2ff;
+  color:#3730a3;
+  text-decoration:none;
+  font-size:19px;
+  border:1px solid #d9ddff;
+  box-shadow:0 2px 7px rgba(30,41,59,.08);
+  transition:transform .15s ease,background .15s ease;
+}
+.hotelMapIcon:hover{transform:scale(1.08);background:#dfe5ff}
+
 </style>
 </head>
 <body>
@@ -188,13 +249,129 @@ body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--b
     <section id="stay" class="panel">
       <h2>אפשרויות לינה לפי אזור</h2>
       <div class="hotels">
-        <div class="card hotel"><span class="badge">12/9 + 23/9</span><h3>✈️ Malpensa</h3><h4>Sheraton Milan Malpensa</h4><p>גישה ישירה לטרמינל 1, נוח במיוחד ללילה האחרון.</p><h4>Holiday Inn Express Malpensa</h4><p>אפשרות פרקטית וזולה יותר בקרבת השדה.</p><h4>Idea Hotel Malpensa</h4><p>אופציית תקציב בקרבת השדה.</p></div>
-        <div class="card hotel"><span class="badge">13–14/9</span><h3>🌊 Menaggio / Como</h3><h4>Hotel Garni Corona</h4><p>מיקום מרכזי מאוד ב-Menaggio.</p><h4>Grand Hotel Menaggio</h4><p>על האגם ובקרבת המעבורות.</p><h4>Hotel Sonenga</h4><p>אפשרות פשוטה יותר באזור.</p></div>
-        <div class="card hotel"><span class="badge">15/9</span><h3>🇨🇭 Lugano</h3><h4>LUGANODANTE</h4><p>מרכזי ונוח להליכה בעיר.</p><h4>International au Lac</h4><p>על שפת האגם.</p><h4>Novotel Lugano Paradiso</h4><p>אופציה משפחתית פרקטית.</p></div>
-        <div class="card hotel"><span class="badge">16–18/9</span><h3>🏔️ Ortisei</h3><h4>Hotel Albion Mountain Spa Resort</h4><p>מתאים למשפחה, עם מתקנים וחניה.</p><h4>Hotel Garni Walter</h4><p>אפשרות פשוטה יותר בתוך Ortisei.</p><h4>Cavallino Bianco Family Spa</h4><p>מלון משפחות ייעודי ברמה גבוהה.</p></div>
-        <div class="card hotel"><span class="badge">19/9</span><h3>🚤 Mestre</h3><h4>Staycity Aparthotels Venice Mestre</h4><p>נוח למשפחה וללילה אחד.</p><h4>Leonardo Royal Hotel Venice Mestre</h4><p>מודרני ובקרבת התחנה.</p><h4>Novotel Venezia Mestre Castellana</h4><p>פרקטי עם רכב.</p></div>
-        <div class="card hotel"><span class="badge">20–22/9</span><h3>🌊 Malcesine</h3><h4>Hotel Castello Lake Front</h4><p>מיקום מצוין ליד העיר העתיקה.</p><h4>Ambient Hotel PrimaLuna</h4><p>על שפת האגם.</p><h4>Hotel Capri</h4><p>אופציה טובה לשהות של שלושה לילות.</p></div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=82" alt="Malpensa airport">
+    <div class="hotelHeroTitle"><h3>✈️ Malpensa</h3><span>12/9 + 23/9 · לילה ראשון ואחרון</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי</span>
+      <h4>Sheraton Milan Malpensa</h4>
+      <p>הכי נוח למסלול שלכם — מחובר ישירות ל-Terminal 1, ולכן אידיאלי במיוחד לפני הטיסה ב־05:00.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.marriott.com/en-us/hotels/milmp-sheraton-milan-malpensa-airport-hotel-and-conference-centre/overview/" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Sheraton+Milan+Malpensa+Airport" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
       </div>
+    </div>
+    <div class="hotelPick"><h4>Holiday Inn Express Malpensa</h4><p>אופציה פרקטית וזולה יותר בקרבת השדה.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Milan+Malpensa+Airport" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
+  </div>
+</div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=82" alt="Lake Como">
+    <div class="hotelHeroTitle"><h3>🌊 Menaggio / Lake Como</h3><span>13–14/9 · 2 לילות</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי</span>
+      <h4>Grand Hotel Menaggio</h4>
+      <p>על שפת האגם ובמרכז Menaggio — מיקום מצוין במיוחד ליום המעבורות ל-Bellagio ו-Varenna.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.grandhotelmenaggio.com/" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Grand+Hotel+Menaggio" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Grand+Hotel+Menaggio" target="_blank">🅱️ Booking.com</a></div>
+    </div>
+    <div class="hotelPick"><h4>Hotel Garni Corona</h4><p>אלטרנטיבה מרכזית ונוחה מאוד בתוך Menaggio.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Garni+Corona+Menaggio" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
+  </div>
+</div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=82" alt="Lugano">
+    <div class="hotelHeroTitle"><h3>🇨🇭 Lugano</h3><span>15/9 · לילה אחד</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי</span>
+      <h4>LUGANODANTE</h4>
+      <p>מיקום מרכזי מאוד, חניה מפוקחת וגישה נוחה ברגל למרכז לוגאנו — מתאים במיוחד ללילה קצר.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://luganodante.com/" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=LUGANODANTE+Lugano" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=LUGANODANTE" target="_blank">🅱️ Booking.com</a></div>
+    </div>
+    <div class="hotelPick"><h4>Novotel Lugano Paradiso</h4><p>אלטרנטיבה משפחתית פרקטית עם גישה טובה לרכב.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Novotel+Lugano+Paradiso" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Novotel+Lugano+Paradiso" target="_blank">🅱️ Booking.com</a></div></div>
+  </div>
+</div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82" alt="Dolomites">
+    <div class="hotelHeroTitle"><h3>🏔️ Ortisei</h3><span>16–18/9 · 3 לילות</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי למשפחה</span>
+      <h4>Cavallino Bianco Family Spa Grand Hotel</h4>
+      <p>מלון שמכוון ממש למשפחות, במרכז Ortisei, עם שירותים ופעילויות לילדים — אופציה חזקה אם התקציב מתאים.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.cavallino-bianco.com/en" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Cavallino+Bianco+Ortisei" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      </div>
+    </div>
+    <div class="hotelPick"><h4>Hotel Garni Walter</h4><p>אופציה פשוטה יותר בתוך Ortisei אם רוצים להשקיע פחות במלון.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Garni+Walter+Ortisei" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
+  </div>
+</div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=82" alt="Venice">
+    <div class="hotelHeroTitle"><h3>🚤 Mestre / Venice</h3><span>19/9 · לילה אחד</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי</span>
+      <h4>Staycity Aparthotels Venice Mestre</h4>
+      <p>דירות עם מטבח ובקרבת תחנת Mestre; הרכבת לוונציה קצרה ולכן זה פתרון נוח מאוד למשפחה עם רכב.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.staycity.com/venice/mestre" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Staycity+Aparthotels+Venice+Mestre" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Staycity+Aparthotels+Venice+Mestre" target="_blank">🅱️ Booking.com</a></div>
+    </div>
+    <div class="hotelPick"><h4>Leonardo Royal Hotel Venice Mestre</h4><p>אלטרנטיבה מלונאית קלאסית בקרבת התחנה.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Leonardo+Royal+Hotel+Venice+Mestre" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Leonardo+Royal+Hotel+Venice+Mestre" target="_blank">🅱️ Booking.com</a></div></div>
+  </div>
+</div>
+
+<div class="card hotel">
+  <div class="hotelHero">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=82" alt="Lake Garda">
+    <div class="hotelHeroTitle"><h3>🌊 Malcesine / Lake Garda</h3><span>20–22/9 · 3 לילות</span></div>
+  </div>
+  <div class="hotelBody">
+    <div class="hotelPick recommended">
+      <span class="myChoice">הבחירה שלי</span>
+      <h4>Castello Lake Front Hotel</h4>
+      <p>ממש ליד האגם והעיר העתיקה, למרגלות Castello Scaligero; נוח מאוד לימים של Malcesine ו-Monte Baldo.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.h-c.it/en/" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Castello+Lake+Front+Hotel+Malcesine" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      </div>
+    </div>
+    <div class="hotelPick">
+      <h4>Ambienthotel Primaluna</h4>
+      <p>אופציה משפחתית חזקה נוספת על שפת האגם, עם Family Suites ובמרחק הליכה מהמרכז.</p>
+      <div class="hotelActions">
+        <a class="hotelLink" href="https://www.primalunahotel.com/en" target="_blank">🏨 אתר המלון</a>
+        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Ambienthotel+Primaluna+Malcesine" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
     </section>
 
     <section id="attractions" class="panel">
