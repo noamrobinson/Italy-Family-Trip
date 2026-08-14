@@ -26,7 +26,7 @@ body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--b
 .mapToolbar{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .slice{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:999px;padding:8px 11px;font-weight:700;cursor:pointer;font-size:12px}
 .slice.active{background:#111827;color:#fff;border-color:#111827}.slice.redS.active{background:#dc2626;border-color:#dc2626}.slice.blueS.active{background:#2563eb;border-color:#2563eb}.slice.routeS.active{background:#475569;border-color:#475569}
-.mapModeTabs{display:flex;gap:6px;margin-right:auto}.mapMode{border:0;border-radius:10px;padding:8px 10px;background:#e8eef9;cursor:pointer;font-weight:700;font-size:12px}.mapMode.active{background:#2563eb;color:#fff}
+.mapModeTabs{display:flex;gap:6px;margin-right:auto}.mapMode{border:0;border-radius:10px;padding:8px 10px;background:#e8eef9;cursor:pointer;font-weight:700;font-size:12px}.mapMode.active{background:#f97316;color:#fff;box-shadow:0 3px 10px rgba(249,115,22,.25)}
 .routeStatus{font-size:12px;color:#64748b;padding:0 14px 10px}
 .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin:0 5px}
 .red{background:var(--red)}.blue{background:var(--blue)}
@@ -182,6 +182,60 @@ body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--b
   transition:transform .15s ease,background .15s ease;
 }
 .hotelMapIcon:hover{transform:scale(1.08);background:#dfe5ff}
+
+
+/* Map layout controls */
+.mapLayoutControls{display:flex;gap:8px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line);background:#fff}
+.mapLayoutBtn{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:10px;padding:8px 11px;font-weight:700;cursor:pointer;font-size:12px}
+.mapLayoutBtn.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.mapCard.fullscreenMap{
+  position:fixed !important;
+  inset:4vh 3vw !important;
+  z-index:9999 !important;
+  width:auto !important;
+  height:auto !important;
+  max-width:none !important;
+  margin:0 !important;
+  border-radius:18px !important;
+  box-shadow:0 20px 60px rgba(15,23,42,.28) !important;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+}
+.mapCard.fullscreenMap #map{height:auto !important;flex:1 1 auto;min-height:0}
+.mapCloseBtn{
+  display:none;
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:10000;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:0;
+  background:#111827;
+  color:#fff;
+  font-size:25px;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(15,23,42,.25);
+}
+.mapCard.fullscreenMap .mapCloseBtn{display:flex;align-items:center;justify-content:center}
+body.mapModalOpen{overflow:hidden}
+.mainGrid.mapWide{
+  grid-template-columns:1fr !important;
+}
+.mainGrid.mapWide .rightCol{
+  position:static !important;
+  grid-column:1 / -1;
+  order:-1;
+}
+.mainGrid.mapWide .mapCard{
+  width:100%;
+}
+.mainGrid.mapWide #map{
+  height:560px;
+}
 
 </style>
 </head>
@@ -580,11 +634,15 @@ body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--b
         <button class="slice routeS active" data-layer="fullroute">〰️ מסלול כללי</button>
         <button class="slice routeS active" data-layer="dayroute">🗓️ מסלול יום נבחר</button>
         <div class="mapModeTabs">
-          <button class="mapMode active" data-mode="overview">מפת תכנון</button>
-          <button class="mapMode" data-mode="drive">🚗 מסלול נסיעה אמיתי</button>
+          <button class="mapMode driveToggle" id="driveToggle" data-active="false">🚗 מסלול נסיעה אמיתי</button>
         </div>
       </div>
       <div class="routeStatus" id="routeStatus">מצב תכנון: קווים סכמטיים בין התחנות.</div>
+      <div class="mapLayoutControls">
+        <button class="mapLayoutBtn" id="wideMapBtn">↔️ תצוגה רחבה</button>
+        <button class="mapLayoutBtn" id="fullscreenMapBtn">⛶ הגדל מפה</button>
+      </div>
+      <button class="mapCloseBtn" id="mapCloseBtn" aria-label="סגור מפה">×</button>
       <div id="map"></div>
     </div>
   </aside>
@@ -787,7 +845,28 @@ Object.entries(coords).forEach(([name,c])=>{
  (isSleep?sleepMarkers:poiMarkers).push(marker);
 });
 const fullRouteNames=["Malpensa","Como","Menaggio","Lugano","Ortisei","Mestre","Venice","Malcesine","Gardaland","Sirmione","Malpensa"];
-const fullRoute=L.polyline(fullRouteNames.map(n=>coords[n]),{color:'#94a3b8',weight:3,opacity:.6,dashArray:'7 7'}).addTo(map);
+const fullRoute=L.polyline(fullRouteNames.map(n=>coords[n]),{color:'#334155',weight:5,opacity:.82,dashArray:'10 8'}).addTo(map);
+
+const routeStepMarkers=[];
+function midPoint(a,b){
+  return [(a[0]+b[0])/2,(a[1]+b[1])/2];
+}
+for(let i=0;i<fullRouteNames.length-1;i++){
+  const a=coords[fullRouteNames[i]], b=coords[fullRouteNames[i+1]];
+  const m=midPoint(a,b);
+  const stepIcon=L.divIcon({
+    className:'',
+    html:`<div style="
+      width:30px;height:30px;border-radius:50%;
+      background:#0f172a;color:white;border:3px solid white;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:13px;
+      box-shadow:0 2px 8px rgba(15,23,42,.28)
+    ">${i+1}</div>`,
+    iconSize:[30,30]
+  });
+  routeStepMarkers.push(L.marker(m,{icon:stepIcon,interactive:false}).addTo(map));
+}
 let realDriveRoute=null;
 map.fitBounds(L.latLngBounds(fullRoute.getLatLngs()).pad(.12));
 let highlightLine=null, highlightGroup=null;
@@ -840,7 +919,7 @@ function setMarkerLayer(kind,on){
 document.querySelectorAll('.slice').forEach(btn=>btn.onclick=()=>{
  const key=btn.dataset.layer; layerState[key]=!layerState[key]; btn.classList.toggle('active',layerState[key]);
  if(key==='sleep'||key==='poi') setMarkerLayer(key,layerState[key]);
- if(key==='fullroute'){ if(layerState[key]) fullRoute.addTo(map); else if(map.hasLayer(fullRoute)) map.removeLayer(fullRoute); }
+ if(key==='fullroute'){ if(layerState[key]){ fullRoute.addTo(map); routeStepMarkers.forEach(m=>m.addTo(map)); } else { if(map.hasLayer(fullRoute)) map.removeLayer(fullRoute); routeStepMarkers.forEach(m=>{if(map.hasLayer(m))map.removeLayer(m)}); } }
  if(key==='dayroute' && highlightLine){ if(layerState[key]){ highlightLine.addTo(map); (window.modeLines||[]).forEach(l=>l.addTo(map)); } else { if(map.hasLayer(highlightLine)) map.removeLayer(highlightLine); (window.modeLines||[]).forEach(l=>{if(map.hasLayer(l))map.removeLayer(l)}); } }
 });
 
@@ -886,17 +965,24 @@ async function drawRealDrivingRoute(){
    status.textContent='לא ניתן היה לטעון כרגע מסלול כביש אמיתי. מצב התכנון נשאר זמין.';
  }
 }
-document.querySelectorAll('.mapMode').forEach(btn=>btn.onclick=async()=>{
- document.querySelectorAll('.mapMode').forEach(x=>x.classList.remove('active'));
- btn.classList.add('active'); currentMode=btn.dataset.mode;
- if(currentMode==='overview'){
+document.getElementById('driveToggle').onclick=async function(){
+ const btn=this;
+ const activating=btn.dataset.active!=='true';
+ btn.dataset.active=activating?'true':'false';
+ btn.classList.toggle('active',activating);
+ if(activating){
+   currentMode='drive';
+   await drawRealDrivingRoute();
+ }else{
+   currentMode='overview';
    if(realDriveRoute){ map.removeLayer(realDriveRoute); realDriveRoute=null; }
    document.getElementById('routeStatus').textContent='מצב תכנון: קווים סכמטיים בין התחנות.';
-   if(layerState.fullroute && !map.hasLayer(fullRoute)) fullRoute.addTo(map);
- }else{
-   await drawRealDrivingRoute();
+   if(layerState.fullroute){
+     if(!map.hasLayer(fullRoute)) fullRoute.addTo(map);
+     routeStepMarkers.forEach(m=>{if(!map.hasLayer(m))m.addTo(map)});
+   }
  }
-});
+};
 
 
 function transportBadges(d){
@@ -959,5 +1045,39 @@ document.querySelectorAll('input[type="checkbox"]').forEach((cb,idx)=>{
  cb.checked=localStorage.getItem(key)==='1';
  cb.addEventListener('change',()=>localStorage.setItem(key,cb.checked?'1':'0'));
 });
+
+const mainGrid=document.querySelector('.mainGrid');
+const mapCard=document.querySelector('.mapCard');
+const wideMapBtn=document.getElementById('wideMapBtn');
+const fullscreenMapBtn=document.getElementById('fullscreenMapBtn');
+const mapCloseBtn=document.getElementById('mapCloseBtn');
+
+function refreshMapSoon(){
+  setTimeout(()=>{ map.invalidateSize(); },120);
+}
+
+wideMapBtn.onclick=()=>{
+  const active=!mainGrid.classList.contains('mapWide');
+  mainGrid.classList.toggle('mapWide',active);
+  wideMapBtn.classList.toggle('active',active);
+  wideMapBtn.textContent=active?'↔️ חזרה לתצוגה רגילה':'↔️ תצוגה רחבה';
+  refreshMapSoon();
+};
+
+function closeFullscreenMap(){
+  mapCard.classList.remove('fullscreenMap');
+  document.body.classList.remove('mapModalOpen');
+  fullscreenMapBtn.classList.remove('active');
+  refreshMapSoon();
+}
+fullscreenMapBtn.onclick=()=>{
+  mapCard.classList.add('fullscreenMap');
+  document.body.classList.add('mapModalOpen');
+  fullscreenMapBtn.classList.add('active');
+  refreshMapSoon();
+};
+mapCloseBtn.onclick=closeFullscreenMap;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && mapCard.classList.contains('fullscreenMap')) closeFullscreenMap(); });
+
 </script>
 </body></html>
