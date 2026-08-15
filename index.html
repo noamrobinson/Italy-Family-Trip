@@ -260,17 +260,89 @@ body,button,input,select,textarea,.day,.daybtn,.daybtn *,.detail,.detail *{font-
 .heroStat span{display:block;font-size:12px;opacity:.82;}
 @media(max-width:760px){.heroStats{grid-template-columns:1fr 1fr}}
 
+
+.routeText,.driveRoute,.routeLabel{direction:rtl;unicode-bidi:isolate;}
+
+.headerRoute{
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+  font-size:clamp(14px,1.6vw,18px);
+  font-weight:800;
+  letter-spacing:.1px;
+
+  font-family:"Assistant",Arial,sans-serif !important;
+}
+.headerRoute span{
+  font-family:inherit;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(5px);
+}
+.headerRoute b{
+  font-family:inherit;
+  font-size:22px;
+  line-height:1;
+  opacity:.95;
+}
+
+
+.headerRoute span{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:92px;
+}
+.headerRoute strong{
+  font:inherit;
+  font-weight:800;
+  line-height:1.15;
+}
+.headerRoute small{
+  display:block;
+  margin-top:4px;
+  font:inherit;
+  font-size:12px;
+  font-weight:600;
+  opacity:.82;
+  direction:ltr;
+}
+
+
+.headerRoute,
+.headerRoute span,
+.headerRoute strong,
+.headerRoute small,
+.headerRoute b{
+  font-family:"Assistant",Arial,sans-serif !important;
+}
+
 </style>
 </head>
 <body>
 <header class="hero">
   <h1>טיול משפחתי בצפון איטליה</h1>
-  <p>12–24 בספטמבר 2026 · איטליה ושוויץ · מסלול משפחתי ברכב</p>
+<div class="headerRoute" dir="rtl" aria-label="המסלול הכללי">
+  <span><strong>מלפנסה</strong><small>12–13/9</small></span><b>←</b>
+  <span><strong>בלאג׳יו</strong><small>13–16/9</small></span><b>←</b>
+  <span><strong>אורטיסי</strong><small>16–19/9</small></span><b>←</b>
+  <span><strong>מסטרה / ונציה</strong><small>19–20/9</small></span><b>←</b>
+  <span><strong>לזיסה</strong><small>20–23/9</small></span><b>←</b>
+  <span><strong>מלפנסה</strong><small>23–24/9</small></span>
+</div>
+
+  <p>12–24 בספטמבר 2026 · צפון איטליה · מסלול משפחתי ברכב</p>
   <div class="heroStats">
     <div class="heroStat"><b>12 לילות</b><span>כולל לילה ראשון ואחרון ליד Malpensa</span></div>
-    <div class="heroStat"><b>5 אזורי טיול</b><span>קומו · לוגאנו · דולומיטים · ונציה · גארדה</span></div>
-    <div class="heroStat"><b>~990 ק״מ</b><span>בין בסיסי הלינה המרכזיים</span></div>
-    <div class="heroStat"><b>3 חוויות ילדים בולטות</b><span>Swissminiatur · רכבלים · Gardaland</span></div>
+    <div class="heroStat"><b>4 אזורי טיול</b><span>קומו · ונציה · דולומיטים · גארדה</span></div>
+    <div class="heroStat"><b>~955 ק״מ</b><span>בין בסיסי הלינה המרכזיים</span></div>
+    <div class="heroStat"><b>3 חוויות ילדים בולטות</b><span>מעבורות · רכבלים · Gardaland</span></div>
   </div>
 </header>
 
@@ -289,18 +361,18 @@ body,button,input,select,textarea,.day,.daybtn,.daybtn *,.detail,.detail *{font-
       <div class="dashGrid">
         <div class="card dashCard"><h3>🗓️ סטטוס התכנון</h3><p><span class="statusPill done">מסלול בסיסי סגור</span></p><p>קומו ← לוגאנו ← דולומיטים ← ונציה ← גארדה ← מלפנסה.</p></div>
         <div class="card dashCard"><h3>🏨 לינות</h3><p><span class="statusPill openPill">לבחירה/הזמנה</span></p><p>יש shortlist בכל אזור; עדיין לא נבחרו מלונות סופיים.</p></div>
-        <div class="card dashCard"><h3>🎟️ הזמנות מראש</h3><p><span class="statusPill info">לבדיקה סמוך לנסיעה</span></p><p>Gardaland, רכבלים, Swissminiatur ומעבורות בהתאם ללוחות 2026.</p></div>
+        <div class="card dashCard"><h3>🎟️ הזמנות מראש</h3><p><span class="statusPill info">לבדיקה סמוך לנסיעה</span></p><p>Gardaland, רכבלים ומעבורות באגם קומו בהתאם ללוחות 2026.</p></div>
       </div>
 
       <div class="plannerGrid">
         <div class="card planner">
           <h3>⭐ Highlights של הטיול</h3>
           <div class="checkline"><input type="checkbox"> <span>Bellagio + Varenna במעבורת</span></div>
-          <div class="checkline"><input type="checkbox"> <span>Gandria + Swissminiatur</span></div>
+          <div class="checkline"><input type="checkbox"> <span>Varenna + Menaggio במעבורת</span></div>
           <div class="checkline"><input type="checkbox"> <span>Seceda</span></div>
           <div class="checkline"><input type="checkbox"> <span>Alpe di Siusi</span></div>
           <div class="checkline"><input type="checkbox"> <span>ונציה בערב</span></div>
-          <div class="checkline"><input type="checkbox"> <span>Monte Baldo + Limone</span></div>
+          <div class="checkline"><input type="checkbox"> <span>Sirmione + דרום אגם גארדה</span></div>
           <div class="checkline"><input type="checkbox"> <span>Gardaland</span></div>
           <div class="checkline"><input type="checkbox"> <span>Sirmione בדרך לשדה</span></div>
         </div>
@@ -326,274 +398,22 @@ body,button,input,select,textarea,.day,.daybtn,.daybtn *,.detail,.detail *{font-
       <div class="card note">*המרחקים וזמני הנהיגה הם אומדנים. מומלץ לבדוק Waze/Google Maps בזמן אמת. שעות רכבלים, פארקים ומעבורות יש לאמת סמוך לנסיעה.</div>
     </section>
 
-    <section id="stay" class="panel">
-      <h2>אפשרויות לינה לפי אזור</h2>
-      <div class="hotels">
+    <section id="stay" class="panel"><h2>אפשרויות לינה לפי אזור</h2><div class="hotels">
+<div class="card hotel"><div class="hotelHero"><img loading="lazy" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=82"><div class="hotelHeroTitle"><h3>✈️ Malpensa</h3><span>12/9 + 23/9</span></div></div><div class="hotelBody"><div class="hotelPick recommended"><span class="myChoice">הבחירה שלי</span><h4>Sheraton Milan Malpensa</h4><p>מחובר ל-Terminal 1 — אידיאלי לנחיתה המאוחרת ולטיסת 05:00.</p><div class="hotelActions"><a class="hotelLink" href="https://www.marriott.com/en-us/hotels/milmp-sheraton-milan-malpensa-airport-hotel-and-conference-centre/overview/" target="_blank">🏨 אתר המלון</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Sheraton+Milan+Malpensa" target="_blank">🅱️ Booking.com</a></div><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Sheraton+Milan+Malpensa" target="_blank">📍</a></div></div></div>
+<div class="card hotel"><div class="hotelHero"><img loading="lazy" src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=82"><div class="hotelHeroTitle"><h3>🌊 Bellagio</h3><span>13–15/9 · 3 לילות</span></div></div><div class="hotelBody"><div class="hotelPick recommended"><span class="myChoice">מיקום מועדף</span><h4>Hotel Du Lac & SPA Bellagio</h4><p>מרכזי, מול האגם ונוח מאוד למעבורות.</p><div class="hotelActions"><a class="hotelLink" href="https://www.bellagiohoteldulac.com/" target="_blank">🏨 אתר המלון</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Hotel+Du+Lac+Bellagio" target="_blank">🅱️ Booking.com</a></div><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Du+Lac+Bellagio" target="_blank">📍</a></div></div></div>
+<div class="card hotel"><div class="hotelHero"><img loading="lazy" src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=82"><div class="hotelHeroTitle"><h3>🚤 Mestre</h3><span>19/9 · לילה אחד</span></div></div><div class="hotelBody"><div class="hotelPick recommended"><span class="myChoice">הבחירה שלי</span><h4>Staycity Aparthotels Venice Mestre</h4><p>קרוב לתחנה ונוח למשפחה עם רכב.</p><div class="hotelActions"><a class="hotelLink" href="https://www.staycity.com/venice/mestre" target="_blank">🏨 אתר המלון</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Staycity+Aparthotels+Venice+Mestre" target="_blank">🅱️ Booking.com</a></div><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Staycity+Aparthotels+Venice+Mestre" target="_blank">📍</a></div></div></div>
+<div class="card hotel"><div class="hotelHero"><img loading="lazy" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82"><div class="hotelHeroTitle"><h3>🏔️ Ortisei</h3><span>16–18/9 · 3 לילות</span></div></div><div class="hotelBody"><div class="hotelPick recommended"><span class="myChoice">הבחירה המאוזנת</span><h4>Hotel Albion Mountain Spa Resort</h4><p>בחירה משפחתית חזקה לשלושה לילות בדולומיטים.</p><div class="hotelActions"><a class="hotelLink" href="https://www.albionhotel.net/en/" target="_blank">🏨 אתר המלון</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Hotel+Albion+Ortisei" target="_blank">🅱️ Booking.com</a></div><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Albion+Ortisei" target="_blank">📍</a></div></div></div>
+<div class="card hotel"><div class="hotelHero"><img loading="lazy" src="https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=82"><div class="hotelHeroTitle"><h3>🌊 Lazise</h3><span>20–22/9 · 3 לילות</span></div></div><div class="hotelBody"><div class="hotelPick recommended"><span class="myChoice">מיקום מועדף</span><h4>Hotel Corte Valier</h4><p>על האגם, קרוב למרכז ובסיס מצוין ל-Gardaland ול-Sirmione.</p><div class="hotelActions"><a class="hotelLink" href="https://www.cortevalier.com/" target="_blank">🏨 אתר המלון</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Hotel+Corte+Valier+Lazise" target="_blank">🅱️ Booking.com</a></div><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Corte+Valier+Lazise" target="_blank">📍</a></div></div></div>
+</div></section>
 
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=82" alt="Malpensa airport">
-    <div class="hotelHeroTitle"><h3>✈️ Malpensa</h3><span>12/9 + 23/9 · לילה ראשון ואחרון</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי</span>
-      <h4>Sheraton Milan Malpensa</h4>
-      <p>הכי נוח למסלול שלכם — מחובר ישירות ל-Terminal 1, ולכן אידיאלי במיוחד לפני הטיסה ב־05:00.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.marriott.com/en-us/hotels/milmp-sheraton-milan-malpensa-airport-hotel-and-conference-centre/overview/" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Sheraton+Milan+Malpensa+Airport" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      </div>
-    </div>
-    <div class="hotelPick"><h4>Holiday Inn Express Malpensa</h4><p>אופציה פרקטית וזולה יותר בקרבת השדה.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Milan+Malpensa+Airport" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
-  </div>
-</div>
-
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=82" alt="Lake Como">
-    <div class="hotelHeroTitle"><h3>🌊 Menaggio / Lake Como</h3><span>13–14/9 · 2 לילות</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי</span>
-      <h4>Grand Hotel Menaggio</h4>
-      <p>על שפת האגם ובמרכז Menaggio — מיקום מצוין במיוחד ליום המעבורות ל-Bellagio ו-Varenna.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.grandhotelmenaggio.com/" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Grand+Hotel+Menaggio" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Grand+Hotel+Menaggio" target="_blank">🅱️ Booking.com</a></div>
-    </div>
-    <div class="hotelPick"><h4>Hotel Garni Corona</h4><p>אלטרנטיבה מרכזית ונוחה מאוד בתוך Menaggio.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Garni+Corona+Menaggio" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
-  </div>
-</div>
-
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=82" alt="Lugano">
-    <div class="hotelHeroTitle"><h3>🇨🇭 Lugano</h3><span>15/9 · לילה אחד</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי</span>
-      <h4>LUGANODANTE</h4>
-      <p>מיקום מרכזי מאוד, חניה מפוקחת וגישה נוחה ברגל למרכז לוגאנו — מתאים במיוחד ללילה קצר.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://luganodante.com/" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=LUGANODANTE+Lugano" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=LUGANODANTE" target="_blank">🅱️ Booking.com</a></div>
-    </div>
-    <div class="hotelPick"><h4>Novotel Lugano Paradiso</h4><p>אלטרנטיבה משפחתית פרקטית עם גישה טובה לרכב.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Novotel+Lugano+Paradiso" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Novotel+Lugano+Paradiso" target="_blank">🅱️ Booking.com</a></div></div>
-  </div>
-</div>
-
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82" alt="Dolomites">
-    <div class="hotelHeroTitle"><h3>🏔️ Ortisei</h3><span>16–18/9 · 3 לילות</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי למשפחה</span>
-      <h4>Cavallino Bianco Family Spa Grand Hotel</h4>
-      <p>מלון שמכוון ממש למשפחות, במרכז Ortisei, עם שירותים ופעילויות לילדים — אופציה חזקה אם התקציב מתאים.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.cavallino-bianco.com/en" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Cavallino+Bianco+Ortisei" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      </div>
-    </div>
-    <div class="hotelPick"><h4>Hotel Garni Walter</h4><p>אופציה פשוטה יותר בתוך Ortisei אם רוצים להשקיע פחות במלון.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Hotel+Garni+Walter+Ortisei" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a></div></div>
-  </div>
-</div>
-
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=82" alt="Venice">
-    <div class="hotelHeroTitle"><h3>🚤 Mestre / Venice</h3><span>19/9 · לילה אחד</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי</span>
-      <h4>Staycity Aparthotels Venice Mestre</h4>
-      <p>דירות עם מטבח ובקרבת תחנת Mestre; הרכבת לוונציה קצרה ולכן זה פתרון נוח מאוד למשפחה עם רכב.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.staycity.com/venice/mestre" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Staycity+Aparthotels+Venice+Mestre" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      <a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Staycity+Aparthotels+Venice+Mestre" target="_blank">🅱️ Booking.com</a></div>
-    </div>
-    <div class="hotelPick"><h4>Leonardo Royal Hotel Venice Mestre</h4><p>אלטרנטיבה מלונאית קלאסית בקרבת התחנה.</p><div class="hotelActions"><a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Leonardo+Royal+Hotel+Venice+Mestre" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a><a class="hotelLink bookingLink" href="https://www.booking.com/searchresults.html?ss=Leonardo+Royal+Hotel+Venice+Mestre" target="_blank">🅱️ Booking.com</a></div></div>
-  </div>
-</div>
-
-<div class="card hotel">
-  <div class="hotelHero">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=82" alt="Lake Garda">
-    <div class="hotelHeroTitle"><h3>🌊 Malcesine / Lake Garda</h3><span>20–22/9 · 3 לילות</span></div>
-  </div>
-  <div class="hotelBody">
-    <div class="hotelPick recommended">
-      <span class="myChoice">הבחירה שלי</span>
-      <h4>Castello Lake Front Hotel</h4>
-      <p>ממש ליד האגם והעיר העתיקה, למרגלות Castello Scaligero; נוח מאוד לימים של Malcesine ו-Monte Baldo.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.h-c.it/en/" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Castello+Lake+Front+Hotel+Malcesine" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      </div>
-    </div>
-    <div class="hotelPick">
-      <h4>Ambienthotel Primaluna</h4>
-      <p>אופציה משפחתית חזקה נוספת על שפת האגם, עם Family Suites ובמרחק הליכה מהמרכז.</p>
-      <div class="hotelActions">
-        <a class="hotelLink" href="https://www.primalunahotel.com/en" target="_blank">🏨 אתר המלון</a>
-        <a class="hotelMapIcon" href="https://www.google.com/maps/search/?api=1&query=Ambienthotel+Primaluna+Malcesine" target="_blank" title="פתיחה ב-Google Maps" aria-label="פתיחה ב-Google Maps">📍</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-    </section>
-
-    <section id="attractions" class="panel">
-      <h2>אטרקציות וחוויות שמתאימות לילדים</h2>
-      <div class="attractGrid">
-
-        <div class="card attract">
-          <span class="must">⭐ שיא לילדים</span>
-          <h3>🎢 Gardaland</h3>
-          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 22/9</p>
-          <div><span class="age">מתאים במיוחד: 5–13+</span><span class="when">יום מלא</span></div>
-          <p class="stars">★★★★★</p>
-          <ul>
-            <li>מתקנים משפחתיים, רכבות הרים ומתחמי ילדים.</li>
-            <li>היום המרכזי בטיול שמוקדש נטו לילדים.</li>
-            <li>מומלץ להגיע לפתיחה ולהישאר עד שעות אחר הצהריים.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">מומלץ מאוד</span>
-          <h3>🚠 Seceda + רכבל</h3>
-          <p><b>אזור:</b> דולומיטים · <b>יום:</b> 17/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום–יום</span></div>
-          <p class="stars">★★★★★</p>
-          <ul>
-            <li>עצם העלייה ברכבל היא חוויה לילדים.</li>
-            <li>מסלולים קצרים עם נוף מרשים מאוד.</li>
-            <li>אפשר לשלב בקתה וארוחת צהריים בהר.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">מומלץ</span>
-          <h3>🧗 Adventure Park / Fly Line</h3>
-          <p><b>אזור:</b> Ortisei · <b>יום:</b> 17/9</p>
-          <div><span class="age">מתאים: בערך 5+</span><span class="when">1.5–2 שעות</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>מסלולי חבלים, אתגרי גובה ו-Fly Line.</li>
-            <li>מתאים כתוספת אחר הצהריים אחרי Seceda.</li>
-            <li>יש לאמת פתיחה בתאריכים שלכם סמוך לנסיעה.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">מומלץ</span>
-          <h3>🏔️ Alpe di Siusi</h3>
-          <p><b>אזור:</b> דולומיטים · <b>יום:</b> 18/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום–יום</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>מרחבים פתוחים, רכבל והליכות קלות יחסית.</li>
-            <li>חוויה טובה לילדים שאוהבים טבע בלי מסלול מאתגר.</li>
-            <li>אפשר לשלב הפסקת אוכל בבקתה.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">כיף לילדים</span>
-          <h3>🧩 Swissminiatur</h3>
-          <p><b>אזור:</b> Lugano / Melide · <b>יום:</b> 15/9</p>
-          <div><span class="age">מתאים במיוחד: 4–12</span><span class="when">2–3 שעות</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>שוויץ במיניאטורות עם רכבות, מבנים ואתרים מפורסמים.</li>
-            <li>שובר יפה יום של נוף ועיירות.</li>
-            <li>נוח לשלב אחרי Lugano ו-Gandria.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">חוויה משפחתית</span>
-          <h3>⛴️ Bellagio + Varenna במעבורת</h3>
-          <p><b>אזור:</b> אגם קומו · <b>יום:</b> 14/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">יום רגוע</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>השיט עצמו מוסיף עניין לילדים.</li>
-            <li>כמעט בלי נסיעות רכב באותו יום.</li>
-            <li>אפשר לשלב גלידה, טיילת וסמטאות בלי לחץ.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">חוויה ייחודית</span>
-          <h3>🛶 ונציה – Vaporetto / גונדולה</h3>
-          <p><b>אזור:</b> Venice · <b>יום:</b> 19/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">6–8 שעות בעיר</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>הסירות והתעלות הופכות את העיר לחוויה לילדים.</li>
-            <li>Vaporetto על Grand Canal הוא אופציה מצוינת למשפחה.</li>
-            <li>גונדולה אפשרית, אבל לא חובה.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">מומלץ מאוד</span>
-          <h3>🚠 Monte Baldo</h3>
-          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 21/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">חצי יום</span></div>
-          <p class="stars">★★★★★</p>
-          <ul>
-            <li>רכבל עם תצפית מרשימה על אגם גארדה.</li>
-            <li>אפשר לשלב הליכה קצרה ולא מאומצת.</li>
-            <li>מתאים מאוד לפני שיט ל-Limone.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">משפחתי ורגוע</span>
-          <h3>⛴️ שיט ל-Limone sul Garda</h3>
-          <p><b>אזור:</b> אגם גארדה · <b>יום:</b> 21/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">2–4 שעות</span></div>
-          <p class="stars">★★★★☆</p>
-          <ul>
-            <li>שיט קצר שמוסיף גיוון ליום.</li>
-            <li>עיירה נעימה לטיול, גלידה וארוחה.</li>
-            <li>פחות הליכה מאומצת ויותר יום חופשה רגוע.</li>
-          </ul>
-        </div>
-
-        <div class="card attract">
-          <span class="must">אופציונלי</span>
-          <h3>🚞 Brunate Funicular</h3>
-          <p><b>אזור:</b> Como · <b>יום:</b> 13/9</p>
-          <div><span class="age">מתאים: כל המשפחה</span><span class="when">1–2 שעות</span></div>
-          <p class="stars">★★★☆☆</p>
-          <ul>
-            <li>עלייה קצרה ומהנה מעל העיר Como.</li>
-            <li>תצפית יפה בלי צורך במסלול ארוך.</li>
-            <li>מתאים אם הילדים עדיין עם אנרגיה אחרי הנסיעה.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="card note">
-        <b>האיזון המומלץ לילדים בטיול:</b> Gardaland כ״יום ילדים״ מלא, Swissminiatur כחוויה קצרה באמצע הטיול, ו-Seceda / Monte Baldo כחוויות טבע שיש בהן גם רכבל ואקשן. כך כמעט כל יומיים–שלושה יש משהו שמרגיש שונה ומיוחד עבור הילדים.
-      </div>
-    </section>
+    <section id="attractions" class="panel"><h2>אטרקציות וחוויות שמתאימות לילדים</h2><div class="attractGrid">
+<div class="card attract"><span class="must">⭐ שיא לילדים</span><h3>🎢 Gardaland</h3><p><b>21/9 · Lazise</b></p><p class="stars">★★★★★</p><p>יום מלא בפארק, במרחק נסיעה קצר מאוד מהמלון.</p></div>
+<div class="card attract"><span class="must">מומלץ מאוד</span><h3>🚠 Seceda</h3><p><b>17/9 · Ortisei</b></p><p class="stars">★★★★★</p><p>רכבל, תצפיות ומסלול משפחתי.</p></div>
+<div class="card attract"><span class="must">מומלץ</span><h3>🏔️ Alpe di Siusi</h3><p><b>18/9 · Dolomites</b></p><p class="stars">★★★★☆</p><p>אחו אלפיני והליכות קלות יחסית.</p></div>
+<div class="card attract"><span class="must">חוויה משפחתית</span><h3>⛴️ מעבורות Lake Como</h3><p><b>14–15/9</b></p><p class="stars">★★★★☆</p><p>Varenna ו-Menaggio בלי להעמיס נסיעות רכב.</p></div>
+<div class="card attract"><span class="must">חוויה ייחודית</span><h3>🛶 Venice / Vaporetto</h3><p><b>19/9</b></p><p class="stars">★★★★☆</p><p>Grand Canal, San Marco ו-Rialto.</p></div>
+<div class="card attract"><span class="must">יום רגוע</span><h3>🏰 Sirmione</h3><p><b>22/9 · Garda</b></p><p class="stars">★★★★☆</p><p>טירה, סמטאות ואפשרות לשיט קצר.</p></div>
+</div></section>
 
     <section id="planner" class="panel">
       <h2>תכנון, הזמנות וקישורים שימושיים</h2>
@@ -678,184 +498,28 @@ body,button,input,select,textarea,.day,.daybtn,.daybtn *,.detail,.detail *{font-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const dayData=[
-{
- d:"12/9", t:"נחיתה במלפנסה", drive:"0–10 ק״מ · 5–15 דק׳",
- morning:"נחיתה סביב 22:00, ביקורת דרכונים ואיסוף מזוודות.",
- noon:"איסוף הרכב השכור. אין תכנון לנסיעה ארוכה בלילה.",
- eve:"Check-in ולינה ליד/בתוך השדה כדי להתחיל רעננים למחרת.",
- sleep:"Malpensa Airport",
- pts:["Malpensa"], route:["Malpensa"],
- imgs:[
-  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","נחיתה ואיסוף רכב"],
-  ["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","לילה רגוע ליד השדה"],
-  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","מתחילים את הטיול למחרת"]
- ]
-},
-{
- d:"13/9", t:"Malpensa ← אגם קומו", drive:"~80 ק״מ · ~1:15 ש׳",
- morning:"ארוחת בוקר ויציאה לכיוון Como. טיול קצר בטיילת ובמרכז.",
- noon:"עלייה ל-Brunate לתצפית, ארוחת צהריים והמשך לאורך האגם.",
- eve:"הגעה ל-Menaggio, צ'ק-אין, טיילת וארוחת ערב מול האגם.",
- sleep:"Menaggio",
- pts:["Malpensa","Como","Brunate","Menaggio"], route:["Malpensa","Como","Brunate","Menaggio"],
- imgs:[
-  ["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","אגם קומו"],
-  ["https://images.unsplash.com/photo-1612128557461-4c4e369fd2a2?auto=format&fit=crop&w=1200&q=80","תצפיות מעל קומו"],
-  ["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","עיירות האגם"]
- ]
-},
-{
- d:"14/9", t:"Bellagio + Varenna", drive:"רכב מינימלי · מעבורות",
- morning:"יציאה רגלית לנמל Menaggio ומעבורת ל-Bellagio. סיור בעיירה.",
- noon:"מעבורת ל-Varenna, ארוחת צהריים, סמטאות וטיילת האגם.",
- eve:"חזרה במעבורת ל-Menaggio. ערב רגוע בעיירה.",
- sleep:"Menaggio",
- pts:["Menaggio","Bellagio","Varenna"], route:["Menaggio"], ferry:[["Menaggio","Bellagio"],["Bellagio","Varenna"],["Varenna","Menaggio"]],
- imgs:[
-  ["https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=80","Bellagio"],
-  ["https://images.unsplash.com/photo-1590179832266-0c1d79a02316?auto=format&fit=crop&w=1200&q=80","Varenna"],
-  ["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","שיט על אגם קומו"]
- ]
-},
-{
- d:"15/9", t:"לוגאנו + Gandria", drive:"27 ק״מ · ~33 דק׳ לבסיס",
- morning:"יציאה ל-Lugano, חניה וצ'ק-אין/השארת מזוודות. Parco Ciani והמרכז.",
- noon:"שיט/ביקור ב-Gandria וארוחת צהריים. בהמשך Swissminiatur ב-Melide.",
- eve:"חזרה ל-Lugano, טיילת וארוחת ערב בעיר.",
- sleep:"Lugano",
- pts:["Menaggio","Lugano","Gandria","Swissminiatur"], route:["Menaggio","Lugano","Swissminiatur","Lugano"], ferry:[["Lugano","Gandria"],["Gandria","Lugano"]],
- imgs:[
-  ["https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=80","לוגאנו והאגם"],
-  ["https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80","הכפרים של טיצ'ינו"],
-  ["https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80","חוויה משפחתית בשוויץ"]
- ]
-},
-{
- d:"16/9", t:"לוגאנו ← הדולומיטים", drive:"~296 ק״מ · ~5:05 ש׳",
- morning:"יציאה מוקדמת אחרי ארוחת בוקר. זה יום המעבר הארוך בטיול.",
- noon:"עצירת אוכל והתרעננות בדרך; לא להעמיס אטרקציות גדולות.",
- eve:"הגעה ל-Ortisei, צ'ק-אין, הליכה במרכז וארוחת ערב.",
- sleep:"Ortisei",
- pts:["Lugano","Ortisei"], route:["Lugano","Ortisei"],
- imgs:[
-  ["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","יום מעבר נופי"],
-  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","הדרך לאלפים"],
-  ["https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80","הגעה לאזור ההרים"]
- ]
-},
-{
- d:"17/9", t:"Seceda", drive:"כמעט ללא רכב",
- morning:"עלייה מוקדמת ברכבל ל-Seceda לפני העומס. תצפית ומסלול משפחתי.",
- noon:"ארוחת צהריים בהר/בקתה והמשך הליכה בקצב רגוע.",
- eve:"ירידה ל-Ortisei. אם פתוח ומתאים — Adventure Park / Fly Line; אחרת מרכז העיירה.",
- sleep:"Ortisei",
- pts:["Ortisei","Seceda"], route:["Ortisei","Seceda","Ortisei"],
- imgs:[
-  ["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","נוף הררי דרמטי"],
-  ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80","הליכה בהרים"],
-  ["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","רכבלים ותצפיות"]
- ]
-},
-{
- d:"18/9", t:"Alpe di Siusi + מעברי הרים", drive:"30–70 ק״מ מקומי",
- morning:"עלייה ל-Alpe di Siusi וטיול באחו האלפיני.",
- noon:"ארוחת צהריים באזור וחזרה. בהתאם למזג האוויר — יציאה לנסיעה נופית.",
- eve:"Passo Sella + Passo Gardena אם הזמן מאפשר; חזרה ל-Ortisei.",
- sleep:"Ortisei",
- pts:["Ortisei","Alpe di Siusi"], route:["Ortisei","Alpe di Siusi","Ortisei"],
- imgs:[
-  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","אחו אלפיני"],
-  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","טיול משפחתי בטבע"],
-  ["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","מעברי ההרים"]
- ]
-},
-{
- d:"19/9", t:"הדולומיטים ← ונציה", drive:"~199 ק״מ · ~3 ש׳",
- morning:"יציאה סביב 08:00–08:30 ל-Mestre. השארת הרכב והמזוודות.",
- noon:"כניסה לוונציה: Piazza San Marco, בזיליקה והליכה בסמטאות.",
- eve:"Rialto + Grand Canal, Vaporetto/גונדולה אופציונלית, ארוחת ערב וחזרה ל-Mestre.",
- sleep:"Mestre",
- pts:["Ortisei","Mestre","Venice"], route:["Ortisei","Mestre"], transit:[["Mestre","Venice"]],
- imgs:[
-  ["https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=80","ונציה"],
-  ["https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=80","התעלות והגונדולות"],
-  ["https://images.unsplash.com/photo-1533676802871-eca1ae998cd5?auto=format&fit=crop&w=1200&q=80","ערב בעיר"]
- ]
-},
-{
- d:"20/9", t:"ונציה ← אגם גארדה", drive:"~168 ק״מ · ~2 ש׳",
- morning:"ארוחת בוקר ויציאה מ-Mestre לכיוון Malcesine.",
- noon:"הגעה, צ'ק-אין וארוחת צהריים. ביקור ב-Castello Scaligero והעיר העתיקה.",
- eve:"טיילת, גלידה ושקיעה על האגם. ערב רגוע.",
- sleep:"Malcesine",
- pts:["Mestre","Malcesine"], route:["Mestre","Malcesine"],
- imgs:[
-  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","אגם גארדה"],
-  ["https://images.unsplash.com/photo-1600359734513-53f4f9256664?auto=format&fit=crop&w=1200&q=80","Malcesine"],
-  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","ערב רגוע על האגם"]
- ]
-},
-{
- d:"21/9", t:"Monte Baldo + Limone", drive:"מעט נהיגה אם משתמשים בשיט",
- morning:"עלייה מוקדמת ברכבל Monte Baldo, תצפיות והליכה קצרה.",
- noon:"ירידה ל-Malcesine וארוחת צהריים. שיט ל-Limone sul Garda.",
- eve:"טיול ב-Limone וחזרה בשיט ל-Malcesine לארוחת ערב.",
- sleep:"Malcesine",
- pts:["Malcesine","Monte Baldo","Limone"], route:["Malcesine"], ferry:[["Malcesine","Limone"],["Limone","Malcesine"]], cable:[["Malcesine","Monte Baldo"],["Monte Baldo","Malcesine"]],
- imgs:[
-  ["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","Monte Baldo"],
-  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","שיט באגם"],
-  ["https://images.unsplash.com/photo-1600359734513-53f4f9256664?auto=format&fit=crop&w=1200&q=80","Limone"]
- ]
-},
-{
- d:"22/9", t:"Gardaland", drive:"~45 ק״מ לכל כיוון",
- morning:"יציאה לכיוון Gardaland והגעה לפתיחה ככל האפשר.",
- noon:"יום מלא בפארק — מתקנים משפחתיים ורכבות הרים לפי הגילים.",
- eve:"חזרה ל-Malcesine, ארוחת ערב ומנוחה.",
- sleep:"Malcesine",
- pts:["Malcesine","Gardaland"], route:["Malcesine","Gardaland","Malcesine"],
- imgs:[
-  ["https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?auto=format&fit=crop&w=1200&q=80","יום פארק שעשועים"],
-  ["https://images.unsplash.com/photo-1549049950-3d4fcf148581?auto=format&fit=crop&w=1200&q=80","מתקנים לכל המשפחה"],
-  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","חזרה רגועה לאגם"]
- ]
-},
-{
- d:"23/9", t:"Malcesine ← Sirmione ← Malpensa", drive:"Malcesine → Sirmione → Malpensa · ~220 ק״מ · ~3 ש׳ נטו",
- morning:"Check-out ויציאה ל-Sirmione. Castello Scaligero והעיר העתיקה.",
- noon:"ארוחת צהריים וטיול קצר. יציאה לכיוון Malpensa עם מרווח ביטחון.",
- eve:"תדלוק והחזרת הרכב סביב 20:00 ← מלון ליד/בתוך השדה ← שינה קצרה.",
- sleep:"Malpensa Airport",
- pts:["Malcesine","Sirmione","Malpensa"], route:["Malcesine","Sirmione","Malpensa"],
- imgs:[
-  ["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","בוקר אחרון בגארדה"],
-  ["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","Sirmione"],
-  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","חזרה לשדה"]
- ]
-},
-{
- d:"24/9", t:"טיסה הביתה", drive:"—",
- morning:"השכמה לפנות בוקר ויציאה לטרמינל.",
- noon:"טיסה בשעה 05:00.",
- eve:"—", sleep:"—", pts:["Malpensa"], route:["Malpensa"],
- imgs:[
-  ["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","טיסה הביתה"],
-  ["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","סיום הטיול"],
-  ["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","חזרה הביתה"]
- ]
-}
+{d:"12/9",t:"נחיתה ב-Malpensa",drive:"5–15 דק׳ למלון",morning:"—",noon:"—",eve:"נחיתה סביב 22:00, איסוף הרכב ונסיעה קצרה בלבד למלון ליד השדה.",sleep:"Malpensa Airport",pts:["Malpensa"],route:["Malpensa"],imgs:[["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","Malpensa"],["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","לילה ליד השדה"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","תחילת הטיול"]]},
+{d:"13/9",t:"Malpensa ← Bellagio",drive:"כ-85 ק״מ · 1:30–2:00 ש׳",morning:"ארוחת בוקר ויציאה לכיוון אגם קומו.",noon:"הגעה ל-Bellagio, צ'ק-אין וטיול בסמטאות ובמרכז.",eve:"Punta Spartivento, טיילת וארוחת ערב מול האגם.",sleep:"Bellagio",pts:["Malpensa","Bellagio"],route:["Malpensa","Bellagio"],imgs:[["https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=80","Bellagio"],["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","Lake Como"],["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","ערב באגם"]]},
+{d:"14/9",t:"Varenna במעבורת",drive:"ללא נסיעה משמעותית ברכב",morning:"מעבורת מ-Bellagio ל-Varenna וטיול לאורך הטיילת.",noon:"ארוחת צהריים, מרכז Varenna ואפשרות ל-Villa Monastero.",eve:"מעבורת חזרה ל-Bellagio וערב חופשי.",sleep:"Bellagio",pts:["Bellagio","Varenna"],route:["Bellagio"],ferry:[["Bellagio","Varenna"],["Varenna","Bellagio"]],imgs:[["https://images.unsplash.com/photo-1590179832266-0c1d79a02316?auto=format&fit=crop&w=1200&q=80","Varenna"],["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","מעבורת באגם"],["https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=1200&q=80","Bellagio"]]},
+{d:"15/9",t:"Menaggio + יום אגם רגוע",drive:"ללא נסיעה משמעותית ברכב",morning:"מעבורת מ-Bellagio ל-Menaggio וטיול בטיילת.",noon:"ארוחת צהריים וזמן חופשי מול האגם.",eve:"חזרה במעבורת ל-Bellagio לערב אחרון באזור קומו.",sleep:"Bellagio",pts:["Bellagio","Menaggio"],route:["Bellagio"],ferry:[["Bellagio","Menaggio"],["Menaggio","Bellagio"]],imgs:[["https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=80","Lake Como"],["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","Menaggio"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","יום רגוע"]]},
+{d:"16/9",t:"Bellagio ← Ortisei",drive:"כ-320 ק״מ · 3:45–4:15 ש׳",morning:"יציאה מוקדמת יחסית מ-Bellagio. זה יום הנסיעה הארוך במסלול.",noon:"עצירת התרעננות בדרך והמשך צפונה ל-Val Gardena.",eve:"הגעה ל-Ortisei, צ'ק-אין, טיול קצר במרכז וארוחת ערב.",sleep:"Ortisei",pts:["Bellagio","Ortisei"],route:["Bellagio","Ortisei"],imgs:[["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","הדרך לדולומיטים"],["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80","Dolomites"],["https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80","Ortisei"]]},
+{d:"17/9",t:"Seceda",drive:"כמעט ללא רכב",morning:"עלייה מוקדמת ברכבל מ-Ortisei ל-Seceda.",noon:"מסלול משפחתי, תצפיות וארוחת צהריים בבקתה.",eve:"ירידה חזרה ל-Ortisei וזמן חופשי בעיירה.",sleep:"Ortisei",pts:["Ortisei","Seceda"],route:["Ortisei"],cable:[["Ortisei","Seceda"],["Seceda","Ortisei"]],imgs:[["https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80","Seceda"],["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80","הליכה בהרים"],["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","רכבל"]]},
+{d:"18/9",t:"Alpe di Siusi",drive:"נסיעה מקומית קצרה",morning:"יציאה ל-Alpe di Siusi ועלייה לאזור האחו האלפיני.",noon:"הליכה קלה, נופים וארוחת צהריים בבקתה.",eve:"חזרה ל-Ortisei. ערב אחרון רגוע בדולומיטים.",sleep:"Ortisei",pts:["Ortisei","Alpe di Siusi"],route:["Ortisei","Alpe di Siusi","Ortisei"],imgs:[["https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80","Alpe di Siusi"],["https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80","Dolomites"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","יום טבע"]]},
+{d:"19/9",t:"Ortisei ← Mestre / Venice",drive:"כ-200 ק״מ · כ-3:00 ש׳",morning:"ארוחת בוקר ויציאה מ-Ortisei לכיוון Mestre.",noon:"הגעה ל-Mestre, צ'ק-אין והשארת הרכב במלון/חניה.",eve:"כניסה לוונציה בתחבורה ציבורית: San Marco, Rialto, Grand Canal, Vaporetto וארוחת ערב בעיר.",sleep:"Mestre",pts:["Ortisei","Mestre","Venice"],route:["Ortisei","Mestre"],transit:[["Mestre","Venice"],["Venice","Mestre"]],imgs:[["https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1200&q=80","Venice"],["https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=80","התעלות"],["https://images.unsplash.com/photo-1533676802871-eca1ae998cd5?auto=format&fit=crop&w=1200&q=80","ונציה בערב"]]},
+{d:"20/9",t:"Mestre ← Lazise",drive:"כ-145 ק״מ · 1:30–1:45 ש׳",morning:"אפשר לחזור לכמה שעות נוספות בוונציה, או לצאת אחרי ארוחת הבוקר לכיוון גארדה.",noon:"נסיעה קצרה יחסית ל-Lazise, הגעה וצ'ק-אין.",eve:"טיול בעיר העתיקה, הטיילת והנמל של Lazise. ערב רגוע על האגם.",sleep:"Lazise",pts:["Mestre","Lazise"],route:["Mestre","Lazise"],imgs:[["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","Lake Garda"],["https://images.unsplash.com/photo-1600359734513-53f4f9256664?auto=format&fit=crop&w=1200&q=80","Lazise"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","ערב באגם"]]},
+{d:"21/9",t:"Gardaland",drive:"כ-10–15 דק׳ לכל כיוון",morning:"יציאה קצרה מ-Lazise והגעה ל-Gardaland סמוך לפתיחה.",noon:"יום מלא בפארק.",eve:"חזרה ל-Lazise, ארוחת ערב ומנוחה.",sleep:"Lazise",pts:["Lazise","Gardaland"],route:["Lazise","Gardaland","Lazise"],imgs:[["https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?auto=format&fit=crop&w=1200&q=80","Gardaland"],["https://images.unsplash.com/photo-1549049950-3d4fcf148581?auto=format&fit=crop&w=1200&q=80","פארק שעשועים"],["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","Garda"]]},
+{d:"22/9",t:"Sirmione + דרום אגם גארדה",drive:"כ-30–40 ק״מ לכל כיוון",morning:"יציאה ל-Sirmione, העיר העתיקה ו-Castello Scaligero.",noon:"ארוחת צהריים, זמן חופשי ואפשרות לשיט קצר סביב חצי האי.",eve:"חזרה ל-Lazise לערב אחרון באגם.",sleep:"Lazise",pts:["Lazise","Sirmione"],route:["Lazise","Sirmione","Lazise"],imgs:[["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","Sirmione"],["https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1200&q=80","העיר העתיקה"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","Garda"]]},
+{d:"23/9",t:"Lazise ← Malpensa",drive:"כ-180 ק״מ · 2:00–2:30 ש׳",morning:"בוקר רגוע ב-Lazise וזמן חופשי אחרון על האגם.",noon:"ארוחת צהריים ויציאה אחר הצהריים ל-Malpensa.",eve:"תדלוק והחזרת הרכב סביב 20:00, מלון ליד/בתוך Terminal 1.",sleep:"Malpensa Airport",pts:["Lazise","Malpensa"],route:["Lazise","Malpensa"],imgs:[["https://images.unsplash.com/photo-1563293145-a8f5b469b56f?auto=format&fit=crop&w=1200&q=80","בוקר בגארדה"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","הדרך למלפנסה"],["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","Malpensa"]]},
+{d:"24/9",t:"טיסה הביתה",drive:"—",morning:"השכמה לפנות בוקר ומעבר לטרמינל.",noon:"טיסה בשעה 05:00.",eve:"—",sleep:"—",pts:["Malpensa"],route:["Malpensa"],imgs:[["https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80","טיסה"],["https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=80","סיום"],["https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80","חזרה"]]}
 ];
 
 const coords={
- "Malpensa":[45.6306,8.7281],"Como":[45.8081,9.0852],"Brunate":[45.8200,9.0980],"Menaggio":[46.0200,9.2380],
- "Bellagio":[45.9877,9.2615],"Varenna":[46.0107,9.2837],"Lugano":[46.0037,8.9511],"Gandria":[46.0048,9.0030],
- "Swissminiatur":[45.9550,8.9470],"Ortisei":[46.5766,11.6728],"Seceda":[46.6007,11.7244],"Alpe di Siusi":[46.5400,11.6170],
- "Mestre":[45.4939,12.2429],"Venice":[45.4408,12.3155],"Malcesine":[45.7630,10.8080],"Monte Baldo":[45.7735,10.8435],
- "Limone":[45.8145,10.7928],"Gardaland":[45.4550,10.7130],"Sirmione":[45.4927,10.6080]
+ "Malpensa":[45.6306,8.7281],"Bellagio":[45.9877,9.2615],"Varenna":[46.0107,9.2837],"Menaggio":[46.0200,9.2380],
+ "Mestre":[45.4939,12.2429],"Venice":[45.4408,12.3155],"Ortisei":[46.5766,11.6728],"Seceda":[46.6007,11.7244],
+ "Alpe di Siusi":[46.5400,11.6170],"Lazise":[45.5053,10.7326],"Gardaland":[45.4550,10.7130],"Sirmione":[45.4927,10.6080]
 };
-const sleeps=new Set(["Malpensa","Menaggio","Lugano","Ortisei","Mestre","Malcesine"]);
-const labels={"Malpensa":"Malpensa","Como":"Como","Brunate":"Brunate","Menaggio":"Menaggio","Bellagio":"Bellagio","Varenna":"Varenna","Lugano":"Lugano","Gandria":"Gandria","Swissminiatur":"Swissminiatur","Ortisei":"Ortisei","Seceda":"Seceda","Alpe di Siusi":"Alpe di Siusi","Mestre":"Mestre","Venice":"Venice","Malcesine":"Malcesine","Monte Baldo":"Monte Baldo","Limone":"Limone","Gardaland":"Gardaland","Sirmione":"Sirmione"};
+const sleeps=new Set(["Malpensa","Bellagio","Mestre","Ortisei","Lazise"]);
+const labels={"Malpensa":"Malpensa","Bellagio":"Bellagio","Varenna":"Varenna","Menaggio":"Menaggio","Mestre":"Mestre","Venice":"Venice","Ortisei":"Ortisei","Seceda":"Seceda","Alpe di Siusi":"Alpe di Siusi","Lazise":"Lazise","Gardaland":"Gardaland","Sirmione":"Sirmione"};
 
 const map=L.map('map').setView([45.8,10.1],7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
@@ -870,7 +534,7 @@ Object.entries(coords).forEach(([name,c])=>{
  markerObjs[name]=marker;
  (isSleep?sleepMarkers:poiMarkers).push(marker);
 });
-const fullRouteNames=["Malpensa","Como","Menaggio","Lugano","Ortisei","Mestre","Venice","Malcesine","Gardaland","Sirmione","Malpensa"];
+const fullRouteNames=["Malpensa","Bellagio","Ortisei","Mestre","Lazise","Malpensa"];
 const fullRoute=L.polyline(fullRouteNames.map(n=>coords[n]),{color:'#334155',weight:5,opacity:.82,dashArray:'10 8'}).addTo(map);
 
 const routeStepMarkers=[];
@@ -962,7 +626,7 @@ async function drawRealDrivingRoute(){
    const i=Number(active.dataset.day); activeData=dayData[i];
    names=activeData.route.filter(n=>coords[n]);
  }else{
-   names=["Malpensa","Como","Menaggio","Lugano","Ortisei","Mestre","Malcesine","Sirmione","Malpensa"];
+   names=["Malpensa","Bellagio","Ortisei","Mestre","Lazise","Malpensa"];
  }
  // Remove consecutive duplicates. Ferry/boat/public-transit/cable-car legs are intentionally excluded.
  names=names.filter((n,i)=>i===0 || n!==names[i-1]);
